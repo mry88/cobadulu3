@@ -77,13 +77,13 @@ const Home = () => {
   };
 
   return (
-    <div className="bg-gradient-to-b from-gray-900 to-gray-600 font-roboto flex h-full w-full min-h-screen overflow-y-auto mt-16">
-      <div className={`flex-grow overflow-y-auto `}>
+    <div className="bg-gradient-to-b from-gray-900 to-gray-600 font-roboto flex h-full w-full min-h-screen overflow-y-auto pt-16">
+      <div className={`flex-grow overflow-y-auto ml-20 mr-20`}>
         {/* Product List Section */}
         <h2 className="text-white font-roboto text-4xl mb-3 mt-3 text-center">Product List</h2>
 
         {/* Add search input */}
-        <div className="mb-4 ml-4">
+        <div className="mb-4">
           <input
             type="text"
             placeholder="Search Products"
@@ -94,7 +94,7 @@ const Home = () => {
         </div>
 
         {/* Add category filter as Category Boxes with Icons */}
-        <div className="mb-4 ml-4 flex flex-wrap gap-2">
+        <div className="mb-4 flex flex-wrap gap-2">
           <button
             onClick={() => setSelectedCategory("")}
             className={`bg-white text-gray-800 px-4 py-2 rounded-lg ${
@@ -116,7 +116,7 @@ const Home = () => {
           ))}
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mt-4 gap-4 ml-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 mt-4 gap-4">
           {status === "success" ? (
             <>
               {filteredProducts.map((product) => (
@@ -144,7 +144,7 @@ const Home = () => {
         </div>
 
         {/* Latest Products Section as a Slick Carousel */}
-        <div className="mb-4 ml-4">
+        <div className="mb-4 ml-10 mr-10">
           <h2 className="text-white font-roboto text-4xl mb-3 mt-3 text-center">Latest Products</h2>
           <Slider {...carouselSettings}>
             {status === "success" ? (

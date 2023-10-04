@@ -133,7 +133,9 @@ const Product = () => {
                 <ProductCategory>
                   Category: {product.category.name}
                 </ProductCategory>
-                <ProductDescription>Description: {product.desc}</ProductDescription>
+                <ProductDescription>Description: <br/> {product.desc.split(' ').length > 50
+                  ? product.desc.split(' ').slice(0, 50).join(' ') + ' ...'
+                  : product.desc}</ProductDescription>
                 <ProductPrice>Price Basic: Rp.{product.price}</ProductPrice>
               </>
             )}
@@ -263,6 +265,8 @@ const ProductCategory = styled.p`
 const ProductDescription = styled.p`
   font-size: 16px;
   margin-bottom: 1rem;
+  max-width: 600px;
+  text-align: justify;
 `;
 
 const ProductPrice = styled.p`

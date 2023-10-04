@@ -18,37 +18,39 @@ const OrderPDF = ({ orderData, orderQuantity, orderTotal }) => {
 
             <Text style={styles.title}>Order Details</Text>
 
-            {cart.cartItems &&
-              cart.cartItems.map((cartItem) => (
-                <div>
-                  <View style={styles.section}>
-                    <Text style={styles.subtitle}>Customer Information :</Text>
-                    <Text>Name  : {auth.name}</Text>
-                    <Text>Email : {auth.email}</Text>
-                  </View>
-
-                  <View style={styles.section}>
-                    <Text style={styles.subtitle}>Order Items :</Text>
+            <View style={styles.section}>
+              <Text style={styles.subtitle}>Customer Information :</Text>
+              <Text>Name    : {auth.name}</Text>
+              <Text>Email   : {auth.email}</Text>
+              <Text>No Telp : {auth.nohp}</Text>
+            </View>
+            <View style={styles.section}>
+              <Text style={styles.subtitle}>Order Items :</Text>
+              {cart.cartItems &&
+                cart.cartItems.map((cartItem) => (
+                  <div>
                     <View key={cartItem._id} style={styles.item}>
                       <Text>Product  : {cartItem.name}</Text>
                       <Text>Price    : Rp.{cartItem.totalPrice}</Text>
                       <Text>Quantity : {cartItem.cartQuantity}</Text>
                     </View>
-                  </View>
+                  </div>
+                ))
+              }
+            </View>
+            <View style={styles.section}>
+              <Text style={styles.subtitle}>Order Summary :</Text>
+              <Text>Quantity : {cart.cartTotalQuantity}</Text>
+              <Text>Total    : Rp.{cart.cartTotalAmount}</Text>
+            </View>
 
-                  <View style={styles.section}>
-                    <Text style={styles.subtitle}>Order Summary :</Text>
-                    <Text>Quantity : {cart.cartTotalQuantity}</Text>
-                    <Text>Total    : Rp.{cart.cartTotalAmount}</Text>
-                  </View>
 
-                  <View style={styles.footer}>
-                    <Text style={styles.gratitude}>Thank you for your order!</Text>
-                    <Text style={styles.gratitude}>Check your email for more information!</Text>
-                  </View>
-                </div>
-              ))
-            }
+
+
+            <View style={styles.footer}>
+              <Text style={styles.gratitude}>Thank you for your order!</Text>
+              <Text style={styles.gratitude}>Check your email for more information!</Text>
+            </View>
           </View>
         </Page>
       </Document>
@@ -58,8 +60,8 @@ const OrderPDF = ({ orderData, orderQuantity, orderTotal }) => {
 
 const styles = StyleSheet.create({
   pdfViewer: {
-    height: 500, 
-    width: 500,  
+    height: 500,
+    width: 500,
     margin: "auto",
   },
   container: {

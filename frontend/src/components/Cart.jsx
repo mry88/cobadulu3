@@ -163,7 +163,7 @@ const Cart = () => {
   }, []);
 
   return (
-    <div className="cart-container">
+    <div className="cart-container mt-16">
       <h2>Shopping Cart</h2>
       {cart.cartItems.length === 0 ? (
         <div className="cart-empty">
@@ -201,11 +201,13 @@ const Cart = () => {
                 <div className="cart-item" key={cartItem._id}>
                   <div className="cart-product">
                     <Link to={"/product/" + cartItem._id}>
-                      <img src={cartItem.image?.url} alt={cartItem.name} />
+                      <img className="w-[100px] h-[100px] object-cover" src={cartItem.image?.url} alt={cartItem.name} />
                     </Link>
                     <div>
                       <h3>{cartItem.name}</h3>
-                      <p>{cartItem.desc.split('. ')[0]}</p><br />
+                      <p>{cartItem.desc.split(' ').length > 10
+                        ? cartItem.desc.split(' ').slice(0, 10).join(' ') + ' ...'
+                        : cartItem.desc}</p><br />
                       <h3>Additional Feature :</h3>
                       {cartItem.selectedFeatures && cartItem.selectedFeatures.map(fn => (
                         <p key={fn}>{fn}</p>
