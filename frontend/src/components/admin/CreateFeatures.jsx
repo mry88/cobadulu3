@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import styled from "styled-components";
 import { PrimaryButton } from "./CommonStyled";
 import { featuresCreate } from "../../slices/featuresSlice";
 
@@ -28,13 +27,13 @@ const CreateFeatures = () => {
   };
 
   return (
-    <StyledCreateFeatures>
-      <StyledForm onSubmit={handleCreateFeature}>
-        <div className="bg-white rounded-lg p-6 shadow-md">
-          <h3 className="text-xl font-semibold mb-4">Create a Feature</h3>
+    <div className="flex justify-center items-center bg-gray-900 mt-32">
+      <div className="bg-gray-800 p-8 rounded-lg shadow-md w-96">
+        <h3 className="text-2xl font-semibold text-white text-center mb-4">Create a Feature</h3>
+        <form onSubmit={handleCreateFeature}>
           <div className="mb-4">
-            <label htmlFor="name" className="text-sm font-medium">
-              Nama Fitur :
+            <label htmlFor="name" className="block text-gray-300 text-sm font-bold mb-2">
+              Nama Fitur:
             </label>
             <input
               type="text"
@@ -43,12 +42,12 @@ const CreateFeatures = () => {
               value={name}
               onChange={(e) => setName(e.target.value)}
               required
-              className="p-2 w-full border rounded focus:outline-none"
+              className="mt-1 py-2.5 px-4 w-full border-2 rounded-lg border-gray-800 bg-gray-700 text-white"
             />
           </div>
           <div className="mb-4">
-            <label htmlFor="price" className="text-sm font-medium">
-              Harga Fitur :
+            <label htmlFor="price" className="block text-gray-300 text-sm font-bold mb-2">
+              Harga Fitur:
             </label>
             <input
               type="number"
@@ -57,12 +56,12 @@ const CreateFeatures = () => {
               value={price}
               onChange={(e) => setPrice(e.target.value)}
               required
-              className="p-2 w-full border rounded focus:outline-none"
+              className="mt-1 py-2.5 px-4 w-full border-2 rounded-lg border-gray-800 bg-gray-700 text-white"
             />
           </div>
           <div className="mb-4">
-            <label htmlFor="description" className="text-sm font-medium">
-              Deskripsi Fitur :
+            <label htmlFor="description" className="block text-gray-300 text-sm font-bold mb-2">
+              Deskripsi Fitur:
             </label>
             <input
               type="text"
@@ -71,53 +70,19 @@ const CreateFeatures = () => {
               value={description}
               onChange={(e) => setDesc(e.target.value)}
               required
-              className="p-2 w-full border rounded focus:outline-none"
+              className="mt-1 py-2.5 px-4 w-full border-2 rounded-lg border-gray-800 bg-gray-700 text-white"
             />
           </div>
-          <PrimaryButton
+          <button
             type="submit"
-            className="py-2 px-4 bg-blue-500 text-white rounded hover:bg-blue-600 transition duration-300"
+            className="w-full text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
           >
             {createStatus === "pending" ? "Submitting" : "Submit"}
-          </PrimaryButton>
-        </div>
-      </StyledForm>
-    </StyledCreateFeatures>
+          </button>
+        </form>
+      </div>
+    </div>
   );
 };
 
 export default CreateFeatures;
-
-const StyledForm = styled.form`
-  display: flex;
-  flex-direction: column;
-  max-width: 300px;
-  margin-top: 2rem;
-
-  select,
-  input {
-    padding: 7px;
-    min-height: 30px;
-    outline: none;
-    border-radius: 5px;
-    border: 1px solid rgb(182, 182, 182);
-    margin: 0.3rem 0;
-
-    &:focus {
-      border: 2px solid rgb(0, 208, 255);
-    }
-  }
-
-  select {
-    color: rgb(95, 95, 95);
-  }
-`;
-
-const StyledCreateFeatures = styled.div`
-  display: flex;
-  justify-content: space-between;
-`;
-
-const CreateForm = styled.div`
-  margin-top: 10px;
-`;

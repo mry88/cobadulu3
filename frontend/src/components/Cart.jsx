@@ -163,7 +163,7 @@ const Cart = () => {
   }, []);
 
   return (
-    <div className="cart-container mt-16">
+    <div className="cart-container mt-16 bg-gray-900 text-white min-h-screen">
       <h2>Shopping Cart</h2>
       {cart.cartItems.length === 0 ? (
         <div className="cart-empty">
@@ -232,7 +232,7 @@ const Cart = () => {
               ))}
           </div>
           <div className="cart-summary">
-            <button className="clear-btn" onClick={() => handleClearCart()}>
+            <button className="rounded-lg border-2 px-5 py-2 text-sm font-medium text-navy-700 transition duration-200 hover:bg-navy-800/5 active:bg-navy-900/5 border-white/20 bg-white/5 text-white hover:bg-white/10 active:bg-white/20" onClick={() => handleClearCart()}>
               Clear Cart
             </button>
             <div className="cart-checkout">
@@ -249,13 +249,14 @@ const Cart = () => {
                     <button onClick={openPDFModal}>Download Order PDF</button>
                   )}
                   <p>Continue to Checkout</p>
-                  <button onClick={() => handleCheckout(cart.cartItems)}>Proceed to Checkout</button>
+                  <button className="text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2" 
+                  onClick={() => handleCheckout(cart.cartItems)}>Proceed to Checkout</button>
                 </>
                 // <PayButton cartItems={cart.cartItems} />
                 // <button onClick={() => handleCheckout(cart.cartItems)}>Check out</button>
               ) : (
                 <button
-                  className="cart-login"
+                  className="text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
                   onClick={() => navigate("/login")}
                 >
                   Login to Check out

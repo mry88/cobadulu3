@@ -1,3 +1,4 @@
+import { createTheme } from "@mui/material";
 import styled from "styled-components";
 
 export const AdminHeaders = styled.div`
@@ -17,3 +18,10 @@ export const PrimaryButton = styled.button`
   cursor: pointer;
   margin: 0.5rem 0;
 `;
+
+export const darkTheme = createTheme({
+  palette: {
+    mode: 'dark',
+  },
+});
+

@@ -87,11 +87,11 @@ const Product = () => {
   };
 
   return (
-    <StyledProduct>
-      <ProductContainer>
-        <TopContainer>
-          <GalleryContainer>
-            <ImageContainer>
+    <div className="bg-gray-900 text-white py-8 min-h-screen pt-32">
+      <div className="container mx-auto p-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div>
+            <div className="rounded-lg overflow-hidden">
               {galleryType === "image" ? (
                 <ModalImage
                   small={product.image?.url}
@@ -100,79 +100,96 @@ const Product = () => {
                   hideDownload={true}
                 />
               ) : (
-                <ProductVideo
+                <iframe
                   src={product.video}
+                  title="product-video"
+                  width="100%"
+                  height="400"
                   frameBorder="0"
                   allow="autoplay; encrypted-media"
                   allowFullScreen
-                  title="video"
-                />
+                ></iframe>
               )}
-            </ImageContainer>
-            <GalleryButtonContainer>
-              <GalleryButton
+            </div>
+            <div className="mt-4 flex justify-center space-x-4">
+              <button
                 onClick={() => toggleGallery("image")}
-                active={galleryType === "image"}
+                className={`${
+                  galleryType === "image"
+                    ? "bg-emerald-500"
+                    : "bg-gray-700"
+                } text-white py-2 px-4 rounded-lg border-2 border-navy-700 text-base font-medium transition duration-200 hover:bg-navy-800/5 active:bg-navy-900/5 border-white/20 bg-white/5 text-white hover:bg-white/10 active:bg-white/20`}
               >
                 Image
-              </GalleryButton>
-              <GalleryButton
+              </button>
+              <button
                 onClick={() => toggleGallery("video")}
-                active={galleryType === "video"}
+                className={`${
+                  galleryType === "video"
+                    ? "bg-emerald-500"
+                    : "bg-gray-700"
+                } text-white py-2 px-4 rounded-lg border-2 border-navy-700 text-base font-medium transition duration-200 hover:bg-navy-800/5 active:bg-navy-900/5 border-white/20 bg-white/5 text-white hover:bg-white/10 active:bg-white/20`}
               >
                 Video
-              </GalleryButton>
-            </GalleryButtonContainer>
-          </GalleryContainer>
-          <ProductDetails>
+              </button>
+            </div>
+          </div>
+          <div>
             {loading ? (
-              <LoadingText>Loading...</LoadingText>
+              <p className="text-center text-2xl">Loading...</p>
             ) : (
               <>
-                <ProductName>{product.name}</ProductName>
-                <ProductCategory>
+                <h2 className="text-3xl font-semibold">{product.name}</h2>
+                <p className="text-lg font-bold mt-2">
                   Category: {product.category.name}
-                </ProductCategory>
-                <ProductDescription>Description: <br/> {product.desc.split(' ').length > 50
-                  ? product.desc.split(' ').slice(0, 50).join(' ') + ' ...'
-                  : product.desc}</ProductDescription>
-                <ProductPrice>Price Basic: Rp.{product.price}</ProductPrice>
+                </p>
+                <p className="text-lg mt-2">
+                  Description:{" "}
+                  {product.desc.split(" ").length > 50
+                    ? product.desc.split(" ").slice(0, 50).join(" ") + " ..."
+                    : product.desc}
+                </p>
+                <p className="text-3xl font-bold mt-4">
+                  Price Basic: Rp.{product.price}
+                </p>
+                <div className="mt-6">
+                  <h3 className="text-2xl font-semibold mb-4">
+                    Add Features:
+                  </h3>
+                  {product.features.map((feature) => (
+                    <label
+                      key={feature.name}
+                      className="flex items-center text-lg mb-2 relative"
+                    >
+                      <input
+                        type="checkbox"
+                        name={feature.name}
+                        value={feature.price}
+                        onChange={(e) => handleFeatureChange(e, feature.name)}
+                         className="w-4 h-4 mr-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-blue-600 ring-offset-gray-800 focus:ring-2 bg-gray-700 border-gray-600"
+                      />
+                      {feature.name} (Rp.{feature.price})
+                      {hoveredFeature === feature.name && (
+                        <FeatureDescription description={feature.description} />
+                      )}
+                    </label>
+                  ))}
+                </div>
+                <p className="text-3xl font-bold mt-4">
+                  Total: Rp.{product.price + selectedFeaturePrice}
+                </p>
+                <button
+                  onClick={() => handleAddToCart(product, selectedFeatures)}
+                  className="bg-emerald-500 mt-4 w-full text-white px-6 py-3 rounded-lg border-2 border-navy-700 text-base font-medium transition duration-200 hover-bg-navy-800/5 active-bg-navy-900/5 border-white/20 bg-white/5 text-white hover-bg-white/10 active-bg-white/20"
+                >
+                  Add To Cart
+                </button>
               </>
             )}
-            <FeatureContainer>
-              <h3 className="text-2xl font-semibold mb-4">Add Features:</h3>
-              {product.features.map((feature) => (
-                <FeatureLabel
-                  key={feature.name}
-                  onMouseEnter={() => handleFeatureHover(feature.name)}
-                  onMouseLeave={handleFeatureLeave}
-                >
-                  <FeatureCheckbox
-                    type="checkbox"
-                    name={feature.name}
-                    value={feature.price}
-                    onChange={(e) => handleFeatureChange(e, feature.name)}
-                  />
-                  {feature.name} (Rp.{feature.price})
-                  {hoveredFeature === feature.name && (
-                    <FeatureDescription>{feature.description}</FeatureDescription>
-                  )}
-                </FeatureLabel>
-              ))}
-            </FeatureContainer>
-            <TotalPrice>
-              Total: Rp.{product.price + selectedFeaturePrice}
-            </TotalPrice>
-            <AddToCartButton
-              onClick={() => handleAddToCart(product, selectedFeatures)}
-              className="mt-4"
-            >
-              Add To Cart
-            </AddToCartButton>
-          </ProductDetails>
-        </TopContainer>
-      </ProductContainer>
-    </StyledProduct>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 };
 

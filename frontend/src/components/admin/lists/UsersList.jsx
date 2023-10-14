@@ -4,6 +4,8 @@ import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { userDelete, usersFetch } from "../../../slices/UsersSlice";
+import { ThemeProvider } from "@mui/material";
+import { darkTheme } from "../CommonStyled";
 
 export default function UsersList() {
   const navigate = useNavigate();
@@ -28,9 +30,9 @@ export default function UsersList() {
     });
 
   const columns = [
-    { field: "id", headerName: "ID", width: 220 },
+    { field: "id", headerName: "ID", width: 120 },
     { field: "uName", headerName: "Name", width: 150 },
-    { field: "uEmail", headerName: "Email", width: 200 },
+    { field: "uEmail", headerName: "Email", width: 180 },
     { field: "uPhone", headerName: "Phone", width: 200 },
     { field: "uAddress", headerName: "Address", width: 200 },
     {
@@ -57,9 +59,9 @@ export default function UsersList() {
         const usrId = params.row.id;
         return (
           <Actions>
-            <Edit onClick={() => navigate(`edit-user/${usrId}`)}>Edit Role</Edit>
+            <button onClick={() => navigate(`edit-user/${usrId}`)} className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-1.5 mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Edit Role</button>
             {/* <Delete onClick={() => handleDelete(params.row.id)}>Delete</Delete> */}
-            <View onClick={() => navigate(`/user/${params.row.id}`)}>View</View>
+            <button onClick={() => navigate(`/user/${params.row.id}`)} className="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-4 py-1.5 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">View</button>
           </Actions>
         );
       },
@@ -71,32 +73,32 @@ export default function UsersList() {
   };
 
   return (
-    <div style={{ height: 400, width: "100%", marginTop: "2rem" }}>
-      <DataGrid
-        rows={rows}
-        columns={columns}
-        pageSize={5}
-        rowsPerPageOptions={[5]}
-        checkboxSelection
-        disableSelectionOnClick
-      />
-    </div>
+    <ThemeProvider theme={darkTheme}>
+      <div style={{ height: 400, width: "100%", marginTop: "4rem" }}>
+        <DataGrid
+          rows={rows ? rows : []}
+          columns={columns}
+          pageSize={5}
+          sx={{
+            backgroundColor: '#0f1418', 
+            color: '#fff', 
+            '& .MuiDataGrid-columnHeader, & .MuiDataGrid-cell': {
+              borderColor: '#555',
+            }
+          }}
+          rowsPerPageOptions={[5]}
+          checkboxSelection
+          disableSelectionOnClick
+        />
+      </div>
+    </ThemeProvider>
   );
 }
 
 const Actions = styled.div`
   width: 100%;
   display: flex;
-
-  button {
-    border: none;
-    outline: none;
-    margin: 5px;
-    padding: 3px 5px;
-    color: white;
-    border-radius: 3px;
-    cursor: pointer;
-  }
+  justify-content: space-between;
 `;
 
 const Edit = styled.button`

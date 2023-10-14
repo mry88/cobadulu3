@@ -1,16 +1,23 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import styled from "styled-components"; // Import styled-components
+import styled from "styled-components";
 import { PrimaryButton } from "./CommonStyled";
 import { categoryCreate } from "../../slices/categorySlice";
 
-// Define StyledCreateCategory using styled-components
 const StyledCreateCategory = styled.div`
   display: flex;
-  justify-content: flex-start; /* Align to the left */
-  align-items: flex-start; /* Align to the top */
-  height: 100vh;
-  padding: 2rem; /* Add some padding to move the form up and to the left */
+  justify-content: center;
+  align-items: center;
+  min-h-screen;
+  background-color: #1a202c; /* Warna latar belakang tema gelap */
+`;
+
+const FormContainer = styled.div`
+  background-color: #2d3748; /* Warna latar belakang form */
+  border-radius: 10px;
+  padding: 2rem;
+  width: 400px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 `;
 
 const CreateCategory = () => {
@@ -34,81 +41,50 @@ const CreateCategory = () => {
   };
 
   return (
-    <StyledCreateCategory>
-      <form
-        onSubmit={handleCreateCategory}
-        className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 w-1/3"
-      >
-        <h3 className="text-2xl font-bold mb-4 text-center">Create a Category</h3>
-        <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="name">Nama category :</label>
-          <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            id="name"
-            type="text"
-            placeholder="Name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            required
-          />
-        </div>
-        <div className="mb-6">
-          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="desc">Deskripsi Category :</label>
-          <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            id="desc"
-            type="text"
-            placeholder="Short Description"
-            value={desc}
-            onChange={(e) => setDesc(e.target.value)}
-            required
-          />
-        </div>
-        <div className="flex items-center justify-center">
-          <PrimaryButton
-            type="submit"
-            className="py-2 px-4 bg-blue-500 text-white rounded hover:bg-blue-600 transition duration-300"
-          >
-            {createStatus === "pending" ? "Submitting" : "Submit"}
-          </PrimaryButton>
-        </div>
-      </form>
-    </StyledCreateCategory>
+    <div className="flex justify-center items-center bg-gray-900 mt-32">
+      <div className="bg-gray-800 p-8 rounded-lg shadow-md w-96">
+        <h3 className="text-2xl font-bold mb-4 text-center text-white">Create a Category</h3>
+        <form onSubmit={handleCreateCategory}>
+          <div className="mb-4">
+            <label className="block text-gray-300 text-sm font-bold mb-2" htmlFor="name">
+              Nama category :
+            </label>
+            <input
+              className="mt-1 py-2.5 px-4 w-full border-2 rounded-lg border-gray-800 bg-gray-700 text-white"
+              id="name"
+              type="text"
+              placeholder="Name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              required
+            />
+          </div>
+          <div className="mb-6">
+            <label className="block text-gray-300 text-sm font-bold mb-2" htmlFor="desc">
+              Deskripsi Category :
+            </label>
+            <input
+              className="mt-1 py-2.5 px-4 w-full border-2 rounded-lg border-gray-800 bg-gray-700 text-white"
+              id="desc"
+              type="text"
+              placeholder="Short Description"
+              value={desc}
+              onChange={(e) => setDesc(e.target.value)}
+              required
+            />
+          </div>
+          <div className="flex items-center justify-center">
+            <button
+              type="submit"
+              className="w-full text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+            >
+              {createStatus === "pending" ? "Submitting" : "Submit"}
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
   );
 };
 
 export default CreateCategory;
-
-const StyledForm = styled.form`
-  display: flex;
-  flex-direction: column;
-  max-width: 300px;
-  margin-top: 2rem;
-
-  select,
-  input {
-    padding: 7px;
-    min-height: 30px;
-    outline: none;
-    border-radius: 5px;
-    border: 1px solid rgb(182, 182, 182);
-    margin: 0.3rem 0;
-
-    &:focus {
-      border: 2px solid rgb(0, 208, 255);
-    }
-  }
-
-  select {
-    color: rgb(95, 95, 95);
-  }
-`;
-
-const StyledCreateFeatures = styled.div`
-  display: flex;
-  justify-content: space-between;
-`;
-
-const CreateForm = styled.div`
-  margin-top: 10px;
-`;

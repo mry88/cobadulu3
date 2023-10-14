@@ -11,7 +11,7 @@ const initialState = {
 export const ordersFetch = createAsyncThunk("orders/ordersFetch", async () => {
   try {
     const response = await axios.get(`${url}/orders`, setHeaders());
-
+    console.log(response);
     return response.data;
   } catch (error) {
     console.log(error);

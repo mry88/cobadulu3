@@ -39,21 +39,21 @@ const Register = () => {
   };
 
   return (
-    <div className="bg-white min-h-screen flex justify-center items-center">
+    <div className="bg-gray-900 min-h-screen flex justify-center items-center pt-24">
       <div className="w-full max-w-md p-6 rounded-lg shadow-md">
         <div
-          className="bg-cover bg-center h-32 mb-6"
+          className="bg-cover bg-center h-32 mb-6 rounded-lg"
           style={{
             backgroundImage: `url(${COVER_IMAGE})`,
             opacity: 0.5, 
           }}
         ></div>
 
-        <div className="bg-white rounded-lg p-6">
+        <div className="bg-gray-800 rounded-lg p-6 text-white">
           <h2 className="text-2xl font-semibold text-center mb-4">Register on AstroFlaz</h2>
           <form className="space-y-4" onSubmit={handleSubmit}>
             <div className="relative">
-              <label htmlFor="name" className="block text-gray-700 font-semibold mb-1">
+              <label htmlFor="name" className="block text-gray-300 text-sm font-bold mb-2">
                 Nama
               </label>
               <div className="flex items-center">
@@ -64,14 +64,14 @@ const Register = () => {
                 <input
                   id="name"
                   type="text"
-                  className="w-full px-4 py-2 border-b border-gray-300 focus:outline-none focus:border-red-600"
+                  className="mt-1 py-2.5 px-4 w-full border-2 rounded-lg border-gray-800 bg-gray-700 text-white"
                   placeholder="Nama"
                   onChange={(e) => setUser({ ...user, name: e.target.value })}
                 />
               </div>
             </div>
             <div className="relative">
-              <label htmlFor="email" className="block text-gray-700 font-semibold mb-1">
+              <label htmlFor="email" className="block text-gray-300 text-sm font-bold mb-2">
                 Email
               </label>
               <div className="flex items-center">
@@ -82,14 +82,14 @@ const Register = () => {
                 <input
                   id="email"
                   type="email"
-                  className="w-full px-4 py-2 border-b border-gray-300 focus:outline-none focus:border-red-600"
+                  className="mt-1 py-2.5 px-4 w-full border-2 rounded-lg border-gray-800 bg-gray-700 text-white"
                   placeholder="Email"
                   onChange={(e) => setUser({ ...user, email: e.target.value })}
                 />
               </div>
             </div>
             <div className="relative">
-              <label htmlFor="email" className="block text-gray-700 font-semibold mb-1">
+              <label htmlFor="email" className="block text-gray-300 text-sm font-bold mb-2">
                 No HP
               </label>
               <div className="flex items-center">
@@ -100,14 +100,14 @@ const Register = () => {
                 <input
                   id="noHp"
                   type="tel"
-                  className="w-full px-4 py-2 border-b border-gray-300 focus:outline-none focus:border-red-600"
+                  className="mt-1 py-2.5 px-4 w-full border-2 rounded-lg border-gray-800 bg-gray-700 text-white"
                   placeholder="No Hp"
                   onChange={(e) => setUser({ ...user, nohp: e.target.value })}
                 />
               </div>
             </div>
             <div className="relative">
-              <label htmlFor="email" className="block text-gray-700 font-semibold mb-1">
+              <label htmlFor="email" className="block text-gray-300 text-sm font-bold mb-2">
                 Alamat
               </label>
               <div className="flex items-center">
@@ -118,14 +118,14 @@ const Register = () => {
                 <input
                   id="address"
                   type="text"
-                  className="w-full px-4 py-2 border-b border-gray-300 focus:outline-none focus:border-red-600"
+                  className="mt-1 py-2.5 px-4 w-full border-2 rounded-lg border-gray-800 bg-gray-700 text-white"
                   placeholder="Address"
                   onChange={(e) => setUser({ ...user, address: e.target.value })}
                 />
               </div>
             </div>
             <div className="relative">
-              <label htmlFor="password" className="block text-gray-700 font-semibold mb-1">
+              <label htmlFor="password" className="block text-gray-300 text-sm font-bold mb-2">
                 Kata Sandi
               </label>
               <div className="flex items-center">
@@ -136,7 +136,7 @@ const Register = () => {
                 <input
                   id="password"
                   type={showPassword ? "text" : "password"}
-                  className="w-full px-4 py-2 border-b border-gray-300 focus:outline-none focus:border-red-600"
+                  className="mt-1 py-2.5 px-4 w-full border-2 rounded-lg border-gray-800 bg-gray-700 text-white"
                   placeholder="Kata Sandi"
                   onChange={(e) => setUser({ ...user, password: e.target.value })}
                 />
@@ -155,15 +155,16 @@ const Register = () => {
             <div className="flex gap-4 mt-1">
               <input
                 type="checkbox"
+                className="mr-2 w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 bg-gray-700 border-gray-600 focus:ring-blue-600 ring-offset-gray-800 focus:ring-offset-gray-800"
                 required
               />
-              <label htmlFor="check" className="text-gray-700">
+              <label htmlFor="check" className="text-white/50">
                 Dengan mencentang ini, Anda setuju dengan{" "}
                 <Link to={"/"}>syarat & ketentuan</Link> kami
               </label>
             </div>
             <button
-              className="bg-red-600 text-white font-semibold px-4 py-2 rounded-md hover:bg-red-500 transition duration-300 w-full"
+              className="w-full focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-4 py-2 mr-2"
               type="submit"
             >
               {auth.registerStatus === "pending" ? "Mendaftar..." : "Daftar"}

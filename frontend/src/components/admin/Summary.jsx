@@ -143,7 +143,8 @@ export default Summary;
 const StyledSummary = styled.div`
   width: 100%;
   display: flex;
-  margin-top: 60px; /* Add margin-top to create space at the top */
+  margin-top: 84px; /* Add margin-top to create space at the top */
+  color : white;
 `;
 
 

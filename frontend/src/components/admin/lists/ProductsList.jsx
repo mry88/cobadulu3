@@ -4,10 +4,12 @@ import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { productDelete } from "../../../slices/productsSlice";
-import { PrimaryButton } from "../CommonStyled";
+import { PrimaryButton, darkTheme } from "../CommonStyled";
 import { setHeaders, url } from "../../../slices/api";
 import { useEffect } from "react";
 import { useState } from "react";
+import { ThemeProvider } from '@mui/material/styles';
+
 
 export default function ProductsList() {
   const navigate = useNavigate();
@@ -72,7 +74,7 @@ export default function ProductsList() {
   }, [items]);
 
   const columns = [
-    { field: "id", headerName: "ID", width: 150 },
+    { field: "id", headerName: "ID", width: 100 },
     {
       field: "imageUrl",
       headerName: "Image",
@@ -93,36 +95,45 @@ export default function ProductsList() {
     {
       field: "actions",
       headerName: "Actions",
-      width: 170,
+      width: 250,
       renderCell: (params) => {
         const prodId = params.row.id;
         return (
           <Actions>
-            <Edit onClick={() => navigate(`edit-product/${prodId}`)}>Edit</Edit>
-            <Delete onClick={() => navigate(`delete-product/${prodId}`)}>Delete</Delete>
-            <View onClick={() => navigate(`/product/${prodId}`)}>
-              View
-            </View>
+            <button onClick={() => navigate(`edit-product/${prodId}`)} className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-1.5 mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Edit</button>
+            <button onClick={() => navigate(`delete-product/${prodId}`)} className="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-4 py-1.5 mr-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Delete</button>
+            <button onClick={() => navigate(`/product/${prodId}`)} className="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-4 py-1.5 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">View</button>
           </Actions>
         );
       },
-    },
+    }
   ];
 
   return (
-    <div style={{ height: 400, width: "100%", marginTop: "2rem" }}>
-      <PrimaryButton onClick={() => navigate("/admin/products/create-product")}>
-        Create
-      </PrimaryButton>
-      <DataGrid
-        rows={row}
-        columns={columns}
-        pageSize={5}
-        rowsPerPageOptions={[5]}
-        checkboxSelection
-        disableSelectionOnClick
-      />
-    </div>
+    <ThemeProvider theme={darkTheme}>
+      <div className="h-screen">
+        <div style={{ height: 400, width: "100%", marginTop: "2rem" }}>
+          <button className="my-6 text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center" onClick={() => navigate("/admin/products/create-product")}>
+            Create
+          </button>
+          <DataGrid
+            rows={row}
+            columns={columns}
+            pageSize={5}
+            sx={{
+              backgroundColor: '#0f1418', 
+              color: '#fff', 
+              '& .MuiDataGrid-columnHeader, & .MuiDataGrid-cell': {
+                borderColor: '#555',
+              }
+            }}
+            rowsPerPageOptions={[5]}
+            checkboxSelection
+            disableSelectionOnClick
+          />
+        </div>
+      </div>
+    </ThemeProvider>
   );
 }
 
@@ -147,16 +158,6 @@ const Actions = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-between;
-
-  button {
-    border: none;
-    outline: none;
-
-    padding: 3px 5px;
-    color: white;
-    border-radius: 3px;
-    cursor: pointer;
-  }
 `;
 
 const Delete = styled.button`

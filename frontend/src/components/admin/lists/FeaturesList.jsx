@@ -7,7 +7,8 @@ import { featuresDelete } from "../../../slices/featuresSlice";
 import { featuresFetch } from "../../../slices/featuresSlice";
 import EditFeatures from "../EditFeatures";
 import { useEffect } from "react";
-import { PrimaryButton } from "../CommonStyled";
+import { PrimaryButton, darkTheme } from "../CommonStyled";
+import { ThemeProvider } from "@mui/material";
 //import EditFeature from "../EditFeature";
 
 export default function FeaturesList() {
@@ -16,8 +17,8 @@ export default function FeaturesList() {
   const { items } = useSelector((state) => state.features);
 
   useEffect(() => {
-      // Fetch features when the component mounts
-      dispatch(featuresFetch());
+    // Fetch features when the component mounts
+    dispatch(featuresFetch());
   });
 
   const rows =
@@ -33,12 +34,12 @@ export default function FeaturesList() {
 
   const columns = [
     { field: "id", headerName: "ID", width: 220 },
-    { field: "pName", headerName: "Name", width: 130 },
-    { field: "pDesc", headerName: "Description", width: 130 },
+    { field: "pName", headerName: "Name", width: 240 },
+    { field: "pDesc", headerName: "Description", width: 300 },
     {
       field: "price",
       headerName: "Price(Rp.)",
-      width: 80,
+      width: 100,
     },
     {
       field: "actions",
@@ -48,8 +49,8 @@ export default function FeaturesList() {
         const featId = params.row.id;
         return (
           <Actions>
-            <Edit onClick={() => navigate(`edit-features/${featId}`)}>Edit</Edit>
-            <Delete onClick={() => navigate(`delete-features/${featId}`)}>Delete</Delete>
+            <button onClick={() => navigate(`edit-features/${featId}`)} className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-1.5 mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Edit</button>
+            <button onClick={() => navigate(`delete-features/${featId}`)} className="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-4 py-1.5 mr-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Delete</button>
           </Actions>
         );
       },
@@ -57,19 +58,29 @@ export default function FeaturesList() {
   ];
 
   return (
-    <div style={{ height: 400, width: "100%", marginTop: "2rem" }}>
-      <PrimaryButton onClick={() => navigate("/admin/features/create-features")}>
-        Create
-      </PrimaryButton>
-      <DataGrid
-        rows={rows}
-        columns={columns}
-        pageSize={5}
-        rowsPerPageOptions={[5]}
-        checkboxSelection
-        disableSelectionOnClick
-      />
-    </div>
+    <ThemeProvider theme={darkTheme}>
+      <div style={{ height: 400, width: "100%", marginTop: "2rem" }}>
+        <button className="my-6 text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+          onClick={() => navigate("/admin/features/create-features")}>
+          Create
+        </button>
+        <DataGrid
+          rows={rows}
+          columns={columns}
+          pageSize={5}
+          sx={{
+            backgroundColor: '#0f1418', 
+            color: '#fff', 
+            '& .MuiDataGrid-columnHeader, & .MuiDataGrid-cell': {
+              borderColor: '#555',
+            }
+          }}
+          rowsPerPageOptions={[5]}
+          checkboxSelection
+          disableSelectionOnClick
+        />
+      </div>
+    </ThemeProvider>
   );
 }
 
@@ -93,16 +104,7 @@ const ImageContainer = styled.div`
 const Actions = styled.div`
   width: 100%;
   display: flex;
-
-  button {
-    border: none;
-    outline: none;
-    margin: 5px;
-    padding: 3px 5px;
-    color: white;
-    border-radius: 3px;
-    cursor: pointer;
-  }
+  justify-content: space-between;
 `;
 
 const Delete = styled.button`
