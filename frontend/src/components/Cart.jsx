@@ -167,7 +167,7 @@ const Cart = () => {
       <h2>Shopping Cart</h2>
       {cart.cartItems.length === 0 ? (
         <div className="cart-empty">
-          <p>Your cart is currently empty</p>
+          <p className="text-white">Your cart is currently empty</p>
           <div className="start-shopping">
             <Link to="/">
               <svg
@@ -175,7 +175,7 @@ const Cart = () => {
                 width="20"
                 height="20"
                 fill="currentColor"
-                className="bi bi-arrow-left"
+                className="bi bi-arrow-left text-white"
                 viewBox="0 0 16 16"
               >
                 <path
@@ -183,7 +183,7 @@ const Cart = () => {
                   d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"
                 />
               </svg>
-              <span>Start Shopping</span>
+              <span className="text-white hover:text-green-600">Start Shopping</span>
             </Link>
           </div>
         </div>
@@ -232,7 +232,7 @@ const Cart = () => {
               ))}
           </div>
           <div className="cart-summary">
-            <button className="rounded-lg border-2 px-5 py-2 text-sm font-medium text-navy-700 transition duration-200 hover:bg-navy-800/5 active:bg-navy-900/5 border-white/20 bg-white/5 text-white hover:bg-white/10 active:bg-white/20" onClick={() => handleClearCart()}>
+            <button className="rounded-lg border-2 px-5 py-2 text-sm font-medium text-navy-700 transition duration-200 hover:bg-navy-800/5 active:bg-navy-900/5 border-white/20 bg-white/5 text-white hover:bg-gradient-to-r from-green-400 via-green-500 to-green-600 active:bg-white/20" onClick={() => handleClearCart()}>
               Clear Cart
             </button>
             <div className="cart-checkout">

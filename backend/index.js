@@ -24,7 +24,7 @@ require("dotenv").config();
 
 app.use(
   cors({
-    origin: "http://localhost:3001",
+    origin: "http://localhost:3000",
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
     credentials: true, // If you're using cookies or sessions
     optionsSuccessStatus: 204,
@@ -67,7 +67,7 @@ app.get("/orders", async (req, res) => {
 });
 
 const uri = process.env.DB_URI;
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 5000;
 
 app.listen(port, () => {
   console.log(`Server running on port: ${port}...`);

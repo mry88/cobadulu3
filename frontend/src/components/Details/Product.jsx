@@ -118,7 +118,7 @@ const Product = () => {
                   galleryType === "image"
                     ? "bg-emerald-500"
                     : "bg-gray-700"
-                } text-white py-2 px-4 rounded-lg border-2 border-navy-700 text-base font-medium transition duration-200 hover:bg-navy-800/5 active:bg-navy-900/5 border-white/20 bg-white/5 text-white hover:bg-white/10 active:bg-white/20`}
+                } text-white py-2 px-4 rounded-lg border-2 border-navy-700 text-base font-medium transition duration-200 hover:bg-gradient-to-r from-green-400 via-green-500 to-green-600 active:bg-green-400 border-white/20 bg-white/5 text-white hover:bg-white/10 active:bg-white/20`}
               >
                 Image
               </button>
@@ -128,7 +128,7 @@ const Product = () => {
                   galleryType === "video"
                     ? "bg-emerald-500"
                     : "bg-gray-700"
-                } text-white py-2 px-4 rounded-lg border-2 border-navy-700 text-base font-medium transition duration-200 hover:bg-navy-800/5 active:bg-navy-900/5 border-white/20 bg-white/5 text-white hover:bg-white/10 active:bg-white/20`}
+                } text-white py-2 px-4 rounded-lg border-2 border-navy-700 text-base font-medium transition duration-200 hover:bg-gradient-to-r from-green-400 via-green-500 to-green-600 active:bg-green-400 border-white/20 bg-white/5 text-white hover:bg-white/10 active:bg-white/20`}
               >
                 Video
               </button>
@@ -180,7 +180,7 @@ const Product = () => {
                 </p>
                 <button
                   onClick={() => handleAddToCart(product, selectedFeatures)}
-                  className="bg-emerald-500 mt-4 w-full text-white px-6 py-3 rounded-lg border-2 border-navy-700 text-base font-medium transition duration-200 hover-bg-navy-800/5 active-bg-navy-900/5 border-white/20 bg-white/5 text-white hover-bg-white/10 active-bg-white/20"
+                  className="bg-emerald-500 mt-4 w-full text-white px-6 py-3 rounded-lg border-2 border-navy-700 text-base font-medium transition duration-200 hover:bg-gradient-to-r from-green-400 via-green-500 to-green-600 active-bg-green-400 border-white/20 bg-white/5 text-white hover-bg-white/10 active-bg-white/20"
                 >
                   Add To Cart
                 </button>

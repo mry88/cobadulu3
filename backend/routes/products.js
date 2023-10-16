@@ -5,7 +5,6 @@ const cloudinary = require("../utils/cloudinary");
 const router = require("express").Router();
 
 //CREATE
-
 router.post("/", async (req, res) => {
   const { name, category, desc, price, image, features, video } = req.body;
 

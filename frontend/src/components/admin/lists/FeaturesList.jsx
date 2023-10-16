@@ -15,7 +15,7 @@ export default function FeaturesList() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { items } = useSelector((state) => state.features);
-
+  console.log(items);
   useEffect(() => {
     // Fetch features when the component mounts
     dispatch(featuresFetch());

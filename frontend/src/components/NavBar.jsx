@@ -20,7 +20,7 @@ const NavBar = () => {
             xmlns="http://www.w3.org/2000/svg"
             width="30"
             height="30"
-            fill="currentColor"
+            fill="seagreen"
             className="bi bi-handbag-fill"
             viewBox="0 0 16 16"
           >
@@ -36,18 +36,20 @@ const NavBar = () => {
       {auth._id ? (
         <Links>
           {auth.isAdmin ? (
-            <div className="flex flex-col  text-slate-100 text-xl font-sans pt-1">
-              <Link to="/admin">Admin</Link>
+            <div className="flex flex-col text-slate-100 text-xl">
+              <Link className="rounded-lg border-2 px-5 py-2 text-lg font-medium text-white transition duration-200 hover:bg-gradient-to-r from-green-400 via-green-500 to-green-600" to="/admin">Admin</Link>
             </div>
           ) : null}
           <div
-            className="flex flex-col pr-10 text-slate-100 text-xl font-sans pb-2"
+            className="flex flex-col pr-10 text-slate-100 text-xl"
             onClick={() => {
               dispatch(logoutUser(null));
               toast.warning("Logged out!", { position: "bottom-left" });
             }}
           >
-            Logout
+            <span className="rounded-lg border-2 px-5 py-2 text-lg font-medium text-white transition duration-200 hover:bg-gradient-to-r from-green-400 via-green-500 to-green-600">
+              Logout
+            </span>
           </div>
         </Links>
       ) : (
@@ -60,12 +62,12 @@ const NavBar = () => {
           </button> */}
           <div className="pr-6">
             <Link to="/login">
-              <button type="button" className="rounded-lg border-2 px-5 py-2 text-sm font-medium text-navy-700 transition duration-200 hover:text-black active:bg-navy-900/5 border-white/20 bg-white/5 text-white hover:bg-white active:bg-white/20">
+              <button type="button" className="rounded-lg border-2 px-5 py-2 text-lg font-medium text-white transition duration-200 hover:bg-gradient-to-r from-green-400 via-green-500 to-green-600">
                 Login
               </button>
             </Link>
             <Link to="/register">
-              <button type="button" className="ml-2 rounded-lg border-2 px-5 py-2 text-sm font-medium text-navy-700 transition duration-200 hover:bg-navy-800/5 active:bg-navy-900/5 border-white/20 bg-white hover:bg-white/10 hover:text-white active:bg-white/20">
+              <button type="button" className="ml-2 rounded-lg border-2 px-5 py-2 text-lg font-medium text-white transition duration-200 hover:bg-gradient-to-r from-green-400 via-green-500 to-green-600">
                 Register
               </button>
             </Link>

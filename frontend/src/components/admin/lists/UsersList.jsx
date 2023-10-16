@@ -54,7 +54,7 @@ export default function UsersList() {
     {
       field: "actions",
       headerName: "Actions",
-      width: 150,
+      width: 200,
       renderCell: (params) => {
         const usrId = params.row.id;
         return (

@@ -11,7 +11,7 @@ function NextArrow(props) {
   const { onClick } = props;
   return (
     <button onClick={onClick} type="button" className="z-0 absolute top-0 right-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-next>
-      <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+      <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 hover:bg-gradient-to-r from-green-400 via-green-500 to-green-600 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
         <svg class="w-4 h-4 text-white dark:text-gray-800" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
           <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4" />
         </svg>
@@ -25,7 +25,7 @@ function PrevArrow(props) {
   const { onClick } = props;
   return (
     <button onClick={onClick} type="button" class="absolute top-0 left-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-prev>
-      <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+      <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 hover:bg-gradient-to-r from-green-400 via-green-500 to-green-600 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
         <svg class="w-4 h-4 text-white dark:text-gray-800" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
           <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 1 1 5l4 4" />
         </svg>
@@ -38,7 +38,6 @@ function PrevArrow(props) {
 const Home = () => {
   const { items: data, status } = useSelector((state) => state.products);
   const { items } = useSelector((state) => state.category);
-
   const scrollButtonRef = useRef();
 
   const [searchText, setSearchText] = useState("");
@@ -133,7 +132,7 @@ const Home = () => {
             placeholder="Search Products"
             value={searchText}
             onChange={(e) => setSearchText(e.target.value)}
-            className="flex w-full border-0 text-white outline-none bg-neutral-800"
+            className="flex w-full border-0 border border-white/50 text-white/90 outline-none bg-neutral-800"
           />
         </div>
 
@@ -169,11 +168,11 @@ const Home = () => {
         </div>
 
         {/* Add category filter as Category Boxes with Icons */}
-        <div className="mb-8 flex flex-wrap gap-2">
+        <div className="mb-8 flex flex-wrap gap-2 content-center justify-center">
           <button
             onClick={() => setSelectedCategory("")}
             className={`border border-white/50 text-white/90 px-4 py-2 flex items-center rounded-full ${selectedCategory === "" ? "" : ""
-              }`}
+              } hover:bg-gradient-to-r from-green-400 via-green-500 to-green-600`}
           >
             <FontAwesomeIcon icon={categoryIcons['All']} className="mr-2" />
             All Categories
@@ -184,7 +183,7 @@ const Home = () => {
                 key={category._id}
                 onClick={() => setSelectedCategory(category.name)}
                 className={`flex items-center rounded-full border border-white/50 text-white/90 px-4 py-2 ${selectedCategory === category.name ? "" : ""
-                  }`}
+                  } hover:bg-gradient-to-r from-green-400 via-green-500 to-green-600`}
               >
                 {/* <img src={require('../Assets/Images/cat1.png')} className="h-14" /> */}
                 <FontAwesomeIcon icon={categoryIcons[category.name]} className="mr-2" />
@@ -204,11 +203,11 @@ const Home = () => {
                 <div className="flex flex-col grow p-4">
                   <h3 className="text-gray-300 font-bold text-2xl pb-2">{product.name}</h3>
                   <p className="text-gray-400 text-sm font-medium">{product.category.name}</p>
-                  <p className="text-gray-100 text-xl font-bold mt-1">$ {product.price}</p>
+                  <p className="text-gray-100 text-xl font-bold mt-1">Rp. {product.price}</p>
                 </div>
                 <div className="px-2 pb-2">
                   <Link to={"/product/" + product._id}>
-                    <button className="w-full rounded-lg border-2 border-navy-700 px-5 py-2 text-base font-medium text-navy-700 transition duration-200 hover:bg-navy-800/5 active:bg-navy-900/5 border-white/20 bg-white/5 text-white hover:bg-white/10 active:bg-white/20">
+                    <button className="w-full rounded-lg border-2 border-navy-700 px-5 py-2 text-base font-medium text-navy-700 transition duration-200 hover:bg-gradient-to-r from-green-400 via-green-500 to-green-600 border-white/20 bg-white/5 text-white hover:bg-white/10 active:bg-white/20">
                       View Detail
                     </button>
                   </Link>
@@ -226,7 +225,7 @@ const Home = () => {
       <button
         ref={scrollButtonRef}
         onClick={scrollToTop}
-        className="fixed bottom-10 right-10 bg-gray-100 text-white px-4 py-4 rounded-full border border-gray-300 focus:outline-none hover:bg-gray-200 focus:ring-4 focus:ring-gray-200"
+        className="fixed bottom-10 right-10 bg-gray-100 text-white px-4 py-4 rounded-full focus:outline-none hover:bg-gradient-to-r from-green-400 via-green-500 to-green-600 focus:ring-4 focus:ring-gray-200"
       >
         <svg class="w-[18px] h-[18px] text-gray-500 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 8">
           <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7 7.674 1.3a.91.91 0 0 0-1.348 0L1 7" />

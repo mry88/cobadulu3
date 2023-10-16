@@ -58,8 +58,8 @@ export default function CategoryList() {
           columns={columns}
           pageSize={5}
           sx={{
-            backgroundColor: '#0f1418', 
-            color: '#fff', 
+            backgroundColor: '#0f1418',
+            color: '#fff',
             '& .MuiDataGrid-columnHeader, & .MuiDataGrid-cell': {
               borderColor: '#555',
             }
