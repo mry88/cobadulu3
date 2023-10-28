@@ -13,8 +13,9 @@ const Transactions = () => {
       setIsLoading(true);
       try {
         const res = await axios.get(`${url}/orders/?new=true`, setHeaders());
-
-        setOrders(res.data);
+        // Mengambil hanya 10 data terbaru
+        const latestOrders = res.data.slice(0, 10);
+        setOrders(latestOrders);
       } catch (err) {
         console.log(err);
       }
@@ -26,11 +27,11 @@ const Transactions = () => {
   return (
     <StyledTransactions>
       {isLoading ? (
-        <p>Transctions loading...</p>
+        <p>Transactions loading...</p>
       ) : (
         <>
           <h3>Latest Transactions</h3>
-          {orders?.map((order, index) => (
+          {orders.map((order, index) => (
             <Transaction key={index}>
               <p>{order.shipping?.name}</p>
               <p>Rp. {(order.total / 100).toLocaleString()}</p>
@@ -46,7 +47,7 @@ const Transactions = () => {
 export default Transactions;
 
 const StyledTransactions = styled.div`
-background: rgb(44,185,120);
+  background: rgb(48, 51, 78);
   color: rgba(234, 234, 255, 0.87);
   padding: 1rem;
   border-radius: 5px;
@@ -58,13 +59,13 @@ const Transaction = styled.div`
   margin-top: 1rem;
   padding: 0.5rem;
   border-radius: 3px;
-  background: rgba(9, 155, 43, 0.70);
+  background: rgba(38, 198, 249, 0.12);
 
   p {
     flex: 1;
   }
 
   &:nth-child(even) {
-    background: rgba(9, 154, 151, 0.70);
+    background: rgba(102, 108, 255, 0.12);
   }
 `;
