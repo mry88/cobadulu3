@@ -113,12 +113,12 @@ const Home = () => {
   return (
     <div className="bg-gray-200 font-roboto flex h-full w-full min-h-screen overflow-y-auto pt-[81px]">
       <div className={`flex-grow overflow-y-auto`}>
-        <div>
+        <div className="shadow-xl w-[100%] h-[500px] bg-gradient-to-r from-green-400 via-green-500 to-green-600">
           {/* Product List Section */}
           {/* <h2 className="text-white font-roboto text-4xl mb-3 mt-3 text-center">Product List</h2> */}
 
           {/* Latest Products Section as a Slick Carousel */}
-          <div className="mb-8">
+          <div>
             {/* <h2 className="text-white font-roboto text-4xl mb-3 mt-3 text-center">Latest Products</h2> */}
             <Slider {...carouselSettings} autoplay>
               {status === "success" ? (
@@ -126,7 +126,7 @@ const Home = () => {
                   <div key={product._id} className="">
                     <Link to={"/product/" + product._id}>
                       <img src={product.image.url} alt={product.name} style={{
-                        height: 450
+                        height: 500
                       }} className="w-full object-cover" />
                     </Link>
                     {/* <div className="p-4"> */}
@@ -148,9 +148,22 @@ const Home = () => {
             </Slider>
           </div>
         </div>
-        <div className="ml-20 mr-20 ">
-          <div>
-            <div className="relative mb-4 flex px-4 py-1.5 border-2 shadow-lg bg-gray-100 border-gray-900 rounded-lg w-full items-center mt-12">
+
+        <div className="flex flex-row w-full h-[100px] items-center justify-center">
+          <div className="w-[40%]">
+            <hr className="border-1 border-gray-900"/>
+          </div>
+          <div className="flex w-[500px] items-center justify-center">
+            <h1 className="text-3xl font-semibold font-mono">Our Most Popular Products</h1>
+          </div>
+          <div className="w-[40%]">
+          <hr className="border-1 border-gray-900"/>
+          </div>
+        </div>
+
+        <div className="flex w-full flex-row">
+          <div className="flex-col w-[20%] px-[3%]">
+            <div className="relative mb-4 flex px-4 py-1.5 shadow-xl bg-gray-100 rounded-lg w-full items-center">
               <svg
                 className="w-[18px] h-[18px] text-white mr-4"
                 aria-hidden="true"
@@ -175,11 +188,12 @@ const Home = () => {
                 className="flex w-full border-0 text-dark outline-none bg-gray-100"
               />
             </div>
+
             {/* Add category filter as Category Boxes with Icons */}
-            <div className="mb-8 flex flex-wrap gap-2">
+            <div className="mb-[40px] flex flex-wrap gap-2">
               <button
                 onClick={() => setSelectedCategory("")}
-                className={`border-2 border-gray-900 shadow-lg bg-gray-100 text-dark px-4 py-2 flex items-center rounded-lg ${selectedCategory === "" ? "bg-gradient-to-r from-green-400 via-green-500 to-green-600 text-gray-100" : ""
+                className={`shadow-xl bg-gray-100 text-dark px-4 py-2 flex items-center rounded-lg ${selectedCategory === "" ? "bg-gradient-to-r from-green-400 via-green-500 to-green-600 text-gray-100" : ""
                   } hover:bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:text-white`}
               >
                 <FontAwesomeIcon icon={categoryIcons['All']} className="mr-2" />
@@ -190,24 +204,35 @@ const Home = () => {
                   <button
                     key={category._id}
                     onClick={() => setSelectedCategory(category.name)}
-                    className={`flex items-center rounded-lg shadow-lg bg-gray-100 border-2 border-gray-900 text-dark px-4 py-2 ${selectedCategory === category.name ? "bg-gradient-to-r from-green-400 via-green-500 to-green-600 text-gray-100" : ""
+                    className={`flex items-center rounded-lg shadow-xl bg-gray-100 text-dark px-4 py-2 ${selectedCategory === category.name ? "bg-gradient-to-r from-green-400 via-green-500 to-green-600 text-gray-100" : ""
                       } hover:bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:text-white`}
                   >
                     {/* <img src={require('../Assets/Images/cat1.png')} className="h-14" /> */}
-                    <FontAwesomeIcon icon={categoryIcons[category.name]} className="mr-2" />
+                    {/* <FontAwesomeIcon icon={categoryIcons[category.name]} className="mr-2" /> */}
                     {category.name}
                   </button>
                 </div>
               ))}
             </div>
+            
+            <div className="flex flex-col">
+              <hr className="flex border-1 border-gray-900" />
+              <h1 className="text-lg font-semibold mt-[10px] mb-[10px] font-sans">Some of Our Clients :</h1>
+              <div className="flex flex-wrap gap-2">
+                <img src={require("../Assets/Clients/codespace.png")} alt="#" className="w-[150px] m-[5px]"/>
+                <img src={require("../Assets/Clients/itn.png")} alt="#" className="w-[150px] m-[5px]"/>
+                <img src={require("../Assets/Clients/ciomas.png")} alt="#" className="w-[150px] m-[5px]"/>
+                <img src={require("../Assets/Clients/k2puBrawijaya.png")} alt="#" className="w-[150px] m-[5px]"/>
+              </div>
+            </div>
           </div>
 
           {/* //product */}
-          <div>
+          <div className="flex w-[80%] mr-[3%]">
             <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
               {status === "success" ? (
                 filteredProducts.map((product) => (
-                  <div key={product._id} className="flex flex-col bg-gray-100 shadow-lg border-2 border-gray-900 rounded-lg">
+                  <div key={product._id} className="flex flex-col bg-gray-100 shadow-xl rounded-lg">
                     <Link to={"/product/" + product._id}>
                       <img src={product.image.url} alt={product.name} className="w-full h-48 object-cover rounded-t-lg" />
                     </Link>
