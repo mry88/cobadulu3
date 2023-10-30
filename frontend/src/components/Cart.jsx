@@ -162,147 +162,149 @@ const Cart = () => {
   }, []);
 
   return (
-    <div className="cart-container mt-16 bg-gray-200 text-dark min-h-screen">
-      <h2>Shopping Cart</h2>
-      {cart.cartItems.length === 0 ? (
-        <div className="cart-empty">
-          <p>Your cart is currently empty</p>
-          <div className="start-shopping">
-            <Link to="/">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="20"
-                height="20"
-                fill="currentColor"
-                className="bi bi-arrow-left"
-                viewBox="0 0 16 16"
-              >
-                <path
-                  fillRule="evenodd"
-                  d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"
-                />
-              </svg>
-              <span>Start Shopping</span>
-            </Link>
+    <div className="flex cart-container pt-[80px] bg-gray-200 text-dark min-h-screen items-center justify-center">
+      <div className="rounded-lg p-8 mt-[50px] flex flex-col bg-gray-100 w-[900px] h-[100%] shadow-xl">
+        <h2 className="text-lg font-sans">Shopping Cart</h2>
+        {cart.cartItems.length === 0 ? (
+          <div className="cart-empty">
+            <p>Your cart is currently empty</p>
+            <div className="start-shopping">
+              <Link to="/">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  fill="currentColor"
+                  className="bi bi-arrow-left"
+                  viewBox="0 0 16 16"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"
+                  />
+                </svg>
+                <span>Start Shopping</span>
+              </Link>
+            </div>
           </div>
-        </div>
-      ) : (
-        <div>
-          <div className="titles">
-            <h3 className="product-title">Product</h3>
-            <h3 className="price">Price</h3>
-            <h3 className="quantity">Quantity</h3>
-            <h3 className="total">Total</h3>
-          </div>
-          <div className="cart-items">
-            {cart.cartItems &&
-              cart.cartItems.map((cartItem) => (
-                <div className="cart-item" key={cartItem._id}>
-                  <div className="cart-product">
-                    <Link to={"/product/" + cartItem._id}>
-                      <img className="w-[100px] h-[100px] object-cover" src={cartItem.image?.url} alt={cartItem.name} />
-                    </Link>
-                    <div>
-                      <h3>{cartItem.name}</h3>
-                      <p>{cartItem.desc.split(' ').length > 10
-                        ? cartItem.desc.split(' ').slice(0, 10).join(' ') + ' ...'
-                        : cartItem.desc}</p><br />
-                      <h3>Additional Feature :</h3>
-                      {cartItem.selectedFeatures && cartItem.selectedFeatures.map(fn => (
-                        <p key={fn}>{fn}</p>
-                      ))}
-                      <button onClick={() => handleRemoveFromCart(cartItem)}>
-                        Remove
+        ) : (
+          <div>
+            <div className="titles">
+              <h3 className="product-title">Product</h3>
+              <h3 className="price">Price</h3>
+              <h3 className="quantity">Quantity</h3>
+              <h3 className="total">Total</h3>
+            </div>
+            <div className="cart-items">
+              {cart.cartItems &&
+                cart.cartItems.map((cartItem) => (
+                  <div className="cart-item" key={cartItem._id}>
+                    <div className="cart-product">
+                      <Link to={"/product/" + cartItem._id}>
+                        <img className="w-[100px] h-[100px] object-cover" src={cartItem.image?.url} alt={cartItem.name} />
+                      </Link>
+                      <div>
+                        <h3>{cartItem.name}</h3>
+                        <p>{cartItem.desc.split(' ').length > 6
+                          ? cartItem.desc.split(' ').slice(0, 6).join(' ') + ' ...'
+                          : cartItem.desc}</p><br />
+                        <h3>Additional Feature :</h3>
+                        {cartItem.selectedFeatures && cartItem.selectedFeatures.map(fn => (
+                          <p key={fn}>{fn}</p>
+                        ))}
+                        <button onClick={() => handleRemoveFromCart(cartItem)}>
+                          Remove
+                        </button>
+                      </div>
+                    </div>
+                    <div className="cart-product-price">Rp.{cartItem.totalPrice}</div>
+                    <div className="cart-product-quantity">
+                      <button onClick={() => handleDecreaseCart(cartItem)}>
+                        -
                       </button>
+                      <div className="count">{cartItem.cartQuantity}</div>
+                      <button onClick={() => handleAddToCart(cartItem)}>+</button>
+                    </div>
+                    <div className="cart-product-total-price">
+                      Rp.{cartItem.totalPrice * cartItem.cartQuantity}
                     </div>
                   </div>
-                  <div className="cart-product-price">Rp.{cartItem.totalPrice}</div>
-                  <div className="cart-product-quantity">
-                    <button onClick={() => handleDecreaseCart(cartItem)}>
-                      -
-                    </button>
-                    <div className="count">{cartItem.cartQuantity}</div>
-                    <button onClick={() => handleAddToCart(cartItem)}>+</button>
-                  </div>
-                  <div className="cart-product-total-price">
-                    Rp.{cartItem.totalPrice * cartItem.cartQuantity}
-                  </div>
+                ))}
+            </div>
+            <div className="cart-summary">
+              <button className="rounded-lg bg-gray-100 px-5 py-2 text-sm font-bold text-dark transition duration-200 hover:bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:text-gray-100 shadow-xl" onClick={() => handleClearCart()}>
+                Clear Cart
+              </button>
+              <div className="cart-checkout">
+                <div className="subtotal">
+                  <span>Subtotal</span>
+                  <span className="amount">Rp.{cart.cartTotalAmount}</span>
                 </div>
-              ))}
-          </div>
-          <div className="cart-summary">
-            <button className="rounded-lg border-2 border-gray-900 bg-gray-100 px-5 py-2 text-sm font-bold text-dark transition duration-200 hover:bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:text-gray-100" onClick={() => handleClearCart()}>
-              Clear Cart
-            </button>
-            <div className="cart-checkout">
-              <div className="subtotal">
-                <span>Subtotal</span>
-                <span className="amount">Rp.{cart.cartTotalAmount}</span>
-              </div>
-              {auth._id ? (
-                <>
-                  <p>Continue to Checkout</p>
-                  {showPDF ? (
-                    <button className="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2" 
-                    onClick={closePDFModal}>Back to Cart</button>
-                  ) : (
-                    <button className="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2" 
-                    onClick={openPDFModal}>Download Order PDF</button>
-                  )}
-                  <button className="text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
-                    onClick={() => handleCheckout(cart.cartItems)}>Proceed to Checkout</button>
-                </>
-                // <PayButton cartItems={cart.cartItems} />
-                // <button onClick={() => handleCheckout(cart.cartItems)}>Check out</button>
-              ) : (
-                <button
-                  className="mt-2 text-dark bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
-                  onClick={() => navigate("/login")}
-                >
-                  Login to Check out
-                </button>
-              )}
-
-              <div className="continue-shopping">
-                <Link to="/">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="20"
-                    height="20"
-                    fill="currentColor"
-                    className="bi bi-arrow-left"
-                    viewBox="0 0 16 16"
+                {auth._id ? (
+                  <>
+                    <p>Continue to Checkout</p>
+                    {showPDF ? (
+                      <button className="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 shadow-xl"
+                        onClick={closePDFModal}>Back to Cart</button>
+                    ) : (
+                      <button className="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 shadow-xl"
+                        onClick={openPDFModal}>Download Order PDF</button>
+                    )}
+                    <button className="text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 shadow-xl"
+                      onClick={() => handleCheckout(cart.cartItems)}>Proceed to Checkout</button>
+                  </>
+                  // <PayButton cartItems={cart.cartItems} />
+                  // <button onClick={() => handleCheckout(cart.cartItems)}>Check out</button>
+                ) : (
+                  <button
+                    className="mt-2 text-dark bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 shadow-xl"
+                    onClick={() => navigate("/login")}
                   >
-                    <path
-                      fillRule="evenodd"
-                      d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"
-                    />
-                  </svg>
-                  <span>Continue Shopping</span>
-                </Link>
+                    Login to Check out
+                  </button>
+                )}
+
+                <div className="continue-shopping">
+                  <Link to="/">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="20"
+                      height="20"
+                      fill="currentColor"
+                      className="bi bi-arrow-left"
+                      viewBox="0 0 16 16"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"
+                      />
+                    </svg>
+                    <span>Continue Shopping</span>
+                  </Link>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      )}
-      <Dialog
-        open={showPDF}
-        onClose={closePDFModal}
-        aria-labelledby="order-pdf-dialog-title"
-        fullWidth
-        maxWidth="md"
-      >
-        <DialogTitle id="order-pdf-dialog-title">Order PDF</DialogTitle>
-        <DialogContent>
-          {/* Render the PDF component here */}
-          <OrderPDF orderData={cart.cartItems} />
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={closePDFModal} color="primary">
-            Close
-          </Button>
-        </DialogActions>
-      </Dialog>
+        )}
+        <Dialog
+          open={showPDF}
+          onClose={closePDFModal}
+          aria-labelledby="order-pdf-dialog-title"
+          fullWidth
+          maxWidth="md"
+        >
+          <DialogTitle id="order-pdf-dialog-title">Order PDF</DialogTitle>
+          <DialogContent>
+            {/* Render the PDF component here */}
+            <OrderPDF orderData={cart.cartItems} />
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={closePDFModal} color="primary">
+              Close
+            </Button>
+          </DialogActions>
+        </Dialog>
+      </div>
     </div>
   );
 };

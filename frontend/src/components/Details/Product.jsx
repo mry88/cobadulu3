@@ -87,13 +87,14 @@ const Product = () => {
   };
 
   return (
-    <div className="bg-gray-200 py-8 min-h-screen pt-32">
-      <div className="container mx-auto p-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+    <div className="flex bg-gray-200 min-h-screen pt-[80px] items-center justify-center">
+      <div className="rounded-lg flex container p-8 bg-gray-100 w-[650px] h-[100%] my-[20px] shadow-xl">
+        <div className="flex flex-col w-[600px] h-[100%]">
           <div>
-            <div className="rounded-lg overflow-hidden">
+            <div className="rounded-lg shadow-xl">
               {galleryType === "image" ? (
                 <ModalImage
+                  className="rounded-lg w-[100%] h-[400px]"
                   small={product.image?.url}
                   large={product.image?.url}
                   alt="product"
@@ -101,24 +102,23 @@ const Product = () => {
                 />
               ) : (
                 <iframe
+                  className="rounded-lg w-[100%] h-[400px]"
                   src={product.video}
                   title="product-video"
-                  width="100%"
-                  height="400"
                   frameBorder="0"
                   allow="autoplay; encrypted-media"
                   allowFullScreen
                 ></iframe>
               )}
             </div>
-            <div className="mt-4 flex justify-center space-x-4">
+            <div className="my-4 flex justify-center space-x-4">
               <button
                 onClick={() => toggleGallery("image")}
                 className={`${
                   galleryType === "image"
                     ? "bg-gradient-to-r from-green-400 via-green-500 to-green-600 text-gray-100"
                     : "bg-gray-100"
-                } py-2 px-4 rounded-lg border-2 border-gray-900 text-dark font-bold transition duration-200 hover:bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:text-gray-100`}
+                } py-2 px-4 rounded-lg text-dark font-bold transition duration-200 hover:bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:text-gray-100 shadow-xl`}
               >
                 Image
               </button>
@@ -128,7 +128,7 @@ const Product = () => {
                   galleryType === "video"
                     ? "bg-gradient-to-r from-green-400 via-green-500 to-green-600 text-gray-100"
                     : "bg-gray-100"
-                } text-dark py-2 px-4 rounded-lg border-2 border-gray-900 font-bold transition duration-200 hover:bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:text-gray-100`}
+                } text-dark py-2 px-4 rounded-lg font-bold transition duration-200 hover:bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:text-gray-100 shadow-xl`}
               >
                 Video
               </button>
@@ -180,7 +180,7 @@ const Product = () => {
                 </p>
                 <button
                   onClick={() => handleAddToCart(product, selectedFeatures)}
-                  className="bg-gray-900 mt-4 w-full text-gray-100 px-6 py-3 rounded-lg border-2 border-gray-900 text-base font-bold transition duration-200 hover:bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:text-gray-100"
+                  className="bg-gray-900 mt-4 w-full text-gray-100 px-6 py-3 rounded-lg text-base font-bold transition duration-200 hover:bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:text-gray-100 shadow-xl"
                 >
                   Add To Cart
                 </button>

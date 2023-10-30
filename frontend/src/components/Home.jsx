@@ -81,6 +81,21 @@ const Home = () => {
     "Home": faHome,
   };
 
+  const imageSlider = [
+    {
+      id: 1,
+      image: require("../Assets/Images/pic4.jpg"),
+    },
+    {
+      id: 2,
+      image: require("../Assets/Images/pic2.jpg"),
+    },
+    {
+      id: 3,
+      image: require("../Assets/Images/pic3.jpg"),
+    },
+  ];
+
   // Sort the products by a date field (e.g., createdAt) to display the latest first
   const sortedProducts = [...data].sort((a, b) => {
     return new Date(b.createdAt) - new Date(a.createdAt);
@@ -114,50 +129,37 @@ const Home = () => {
     <div className="bg-gray-200 font-roboto flex h-full w-full min-h-screen overflow-y-auto pt-[81px]">
       <div className={`flex-grow overflow-y-auto`}>
         <div className="shadow-xl w-[100%] h-[500px] bg-gradient-to-r from-green-400 via-green-500 to-green-600">
-          {/* Product List Section */}
-          {/* <h2 className="text-white font-roboto text-4xl mb-3 mt-3 text-center">Product List</h2> */}
 
           {/* Latest Products Section as a Slick Carousel */}
           <div>
-            {/* <h2 className="text-white font-roboto text-4xl mb-3 mt-3 text-center">Latest Products</h2> */}
             <Slider {...carouselSettings} autoplay>
               {status === "success" ? (
-                filteredProducts.map((product) => (
-                  <div key={product._id} className="">
-                    <Link to={"/product/" + product._id}>
-                      <img src={product.image.url} alt={product.name} style={{
+                  imageSlider.map((product) => (
+                    <div key={product.id} className="">
+                      <img src={product.image} alt={product.id} style={{
                         height: 500
-                      }} className="w-full object-cover" />
-                    </Link>
-                    {/* <div className="p-4"> */}
-                    {/* <h3 className="text-white font-bold text-2xl pb-2">{product.name}</h3> */}
-                    {/* Display category name below product name */}
-                    {/* <p className="text-white text-sm font-medium">{product.category.name}</p>
-                    <p className="text-white text-xl font-bold mt-1">$ {product.price}</p>
-                    <Link to={"/product/" + product._id}>
-                      <button className="mt-3 bg-red-600 text-white px-4 py-2 rounded-lg border border-gray-300 hover:bg-red-700 focus:outline-none focus:ring-4 focus:ring-gray-200 sm:w-32 md:w-40 lg:w-48 xl:w-56">View Detail</button>
-                    </Link> */}
-                    {/* </div> */}
-                  </div>
-                ))
+                      }} className="w-full object-fill" />
+                    </div>
+                  ))
               ) : status === "pending" ? (
                 <p className="text-white">Loading...</p>
               ) : (
                 <p className="text-white">Unexpected error occurred...</p>
               )}
             </Slider>
+
           </div>
         </div>
 
         <div className="flex flex-row w-full h-[100px] items-center justify-center">
           <div className="w-[40%]">
-            <hr className="border-1 border-gray-900"/>
+            <hr className="border-1 border-gray-900" />
           </div>
           <div className="flex w-[500px] items-center justify-center">
             <h1 className="text-3xl font-semibold font-mono">Our Most Popular Products</h1>
           </div>
           <div className="w-[40%]">
-          <hr className="border-1 border-gray-900"/>
+            <hr className="border-1 border-gray-900" />
           </div>
         </div>
 
@@ -207,22 +209,20 @@ const Home = () => {
                     className={`flex items-center rounded-lg shadow-xl bg-gray-100 text-dark px-4 py-2 ${selectedCategory === category.name ? "bg-gradient-to-r from-green-400 via-green-500 to-green-600 text-gray-100" : ""
                       } hover:bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:text-white`}
                   >
-                    {/* <img src={require('../Assets/Images/cat1.png')} className="h-14" /> */}
-                    {/* <FontAwesomeIcon icon={categoryIcons[category.name]} className="mr-2" /> */}
                     {category.name}
                   </button>
                 </div>
               ))}
             </div>
-            
+
             <div className="flex flex-col">
               <hr className="flex border-1 border-gray-900" />
               <h1 className="text-lg font-semibold mt-[10px] mb-[10px] font-sans">Some of Our Clients :</h1>
               <div className="flex flex-wrap gap-2">
-                <img src={require("../Assets/Clients/codespace.png")} alt="#" className="w-[150px] m-[5px]"/>
-                <img src={require("../Assets/Clients/itn.png")} alt="#" className="w-[150px] m-[5px]"/>
-                <img src={require("../Assets/Clients/ciomas.png")} alt="#" className="w-[150px] m-[5px]"/>
-                <img src={require("../Assets/Clients/k2puBrawijaya.png")} alt="#" className="w-[150px] m-[5px]"/>
+                <img src={require("../Assets/Clients/codespace.png")} alt="#" className="w-[150px] m-[5px]" />
+                <img src={require("../Assets/Clients/itn.png")} alt="#" className="w-[150px] m-[5px]" />
+                <img src={require("../Assets/Clients/ciomas.png")} alt="#" className="w-[150px] m-[5px]" />
+                <img src={require("../Assets/Clients/k2puBrawijaya.png")} alt="#" className="w-[150px] m-[5px]" />
               </div>
             </div>
           </div>

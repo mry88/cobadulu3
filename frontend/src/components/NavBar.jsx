@@ -12,7 +12,7 @@ const NavBar = () => {
   return (
     <nav className="fixed top-0 z-10 left-0 right-0 bg-gray-900 w-full h-16 justify-between flex items-center border-b-2 border-gray-900 py-10">
       <Link to="/">
-        <img src={require('../Assets/Images/Logo-Ver.png')} className="h-14 ml-10" />
+        <img src={require('../Assets/Images/Logo-Hor.png')} className="h-14 ml-10" />
       </Link>
       <Link to="/cart">
         <div className="flex text-white/30">
