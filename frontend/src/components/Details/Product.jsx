@@ -133,7 +133,7 @@ const Product = () => {
       image: product.image3,
     },
   ];
-  console.log(product.image3);
+
   // Settings for the slick carousel
   const carouselSettings = {
     infinite: true,

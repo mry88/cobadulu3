@@ -115,6 +115,9 @@ const Home = () => {
     return true;
   });
 
+  const latestProd = filteredProducts[0];
+  console.log(latestProd);
+
   // Settings for the slick carousel
   const carouselSettings = {
     infinite: true,
@@ -134,13 +137,13 @@ const Home = () => {
           <div>
             <Slider {...carouselSettings} autoplay>
               {status === "success" ? (
-                  imageSlider.map((product) => (
-                    <div key={product.id} className="">
-                      <img src={product.image} alt={product.id} style={{
-                        height: 500
-                      }} className="w-full object-fill" />
-                    </div>
-                  ))
+                imageSlider.map((product) => (
+                  <div key={product.id} className="">
+                    <img src={product.image} alt={product.id} style={{
+                      height: 500
+                    }} className="w-full object-fill" />
+                  </div>
+                ))
               ) : status === "pending" ? (
                 <p className="text-white">Loading...</p>
               ) : (
@@ -152,11 +155,66 @@ const Home = () => {
         </div>
 
         <div className="flex flex-row w-full h-[100px] items-center justify-center">
+          <div className="w-[15%]">
+            <hr className="border-1 border-gray-900" />
+          </div>
+          <div className="flex w-[500px] items-center justify-center">
+            <h1 className="text-3xl font-semibold font-mono">Our Latest Products</h1>
+          </div>
+          <div className="w-[30%]">
+            <hr className="border-1 border-gray-900" />
+          </div>
+          <div className="flex w-[500px] items-center justify-center">
+            <h1 className="text-3xl font-semibold font-mono">Quick Info About Us</h1>
+          </div>
+          <div className="w-[15%]">
+            <hr className="border-1 border-gray-900" />
+          </div>
+        </div>
+
+        <div className="flex flex-row w-full h-[400px]">
+          <div className="flex flex-row w-[50%]">
+            <div key={latestProd._id} className="flex flex-row bg-gray-100 shadow-xl rounded-lg h-[400px] w-[100%] ml-[50px] mr-[20px]">
+              <Link to={"/product/" + latestProd._id} className="w-[70%] h-[400px] py-[20px] pl-[20px]">
+                <img src={latestProd.image.url} alt={latestProd.name} className="w-[100%] h-[100%] object-cover rounded-lg" />
+              </Link>
+              <div className="flex flex-col w-[30%] p-[20px]">
+                <div className="flex flex-col grow items-center justify-center">
+                  <h3 className="text-dark font-bold text-2xl pb-2">{latestProd.name}</h3>
+                  <p className="text-dark text-sm font-medium">{latestProd.category.name}</p>
+                  <p className="text-dark text-xl font-bold mt-1">Rp. {latestProd.price}</p>
+                </div>
+                <div className="">
+                  <Link to={"/product/" + latestProd._id}>
+                    <button className="w-full rounded-lg border-2 border-gray-900 px-5 py-2 font-bold text-gray-100 transition duration-200 hover:bg-gradient-to-r from-green-400 via-green-500 to-green-600 border-white/20 bg-gray-900 active:bg-white/20 hover:text-white">
+                      View Detail
+                    </button>
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="flex flex-row w-[50%]">
+            <iframe
+              className="rounded-lg w-[100%] h-[400px] mr-[50px] ml-[20px] shadow-xl"
+              src="https://www.youtube.com/embed/a7YYJVGBy6A?si=7tk0ydJ6Wl-l86Md"
+              title="product-video"
+              frameBorder="0"
+              allow="autoplay; encrypted-media"
+              allowFullScreen
+            ></iframe>
+          </div>
+          <div className="w[50%]">
+
+          </div>
+        </div>
+
+        <div className="flex flex-row w-full h-[100px] items-center justify-center">
           <div className="w-[40%]">
             <hr className="border-1 border-gray-900" />
           </div>
           <div className="flex w-[500px] items-center justify-center">
-            <h1 className="text-3xl font-semibold font-mono">Our Most Popular Products</h1>
+            <h1 className="text-3xl font-semibold font-mono">Products by Categories</h1>
           </div>
           <div className="w-[40%]">
             <hr className="border-1 border-gray-900" />
@@ -164,7 +222,7 @@ const Home = () => {
         </div>
 
         <div className="flex w-full flex-row">
-          <div className="flex-col w-[20%] px-[3%]">
+          <div className="flex-col w-[20%] pr-[3%] pl-[50px]">
             <div className="relative mb-4 flex px-4 py-1.5 shadow-xl bg-gray-100 rounded-lg w-full items-center">
               <svg
                 className="w-[18px] h-[18px] text-white mr-4"
@@ -228,7 +286,7 @@ const Home = () => {
           </div>
 
           {/* //product */}
-          <div className="flex w-[80%] mr-[3%]">
+          <div className="flex w-[80%] mr-[50px]">
             <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
               {status === "success" ? (
                 filteredProducts.map((product) => (

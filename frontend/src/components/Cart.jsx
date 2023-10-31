@@ -235,6 +235,16 @@ const Cart = () => {
               <button className="rounded-lg bg-gray-100 px-5 py-2 text-sm font-bold text-dark transition duration-200 hover:bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:text-gray-100 shadow-xl" onClick={() => handleClearCart()}>
                 Clear Cart
               </button>
+              <div className="w-[200px] h-[200px] flex-row items-center justify-center ml-[250px]">
+                <div className="flex items-center justify-center">
+                  <a href="https://api.whatsapp.com/send?phone=6289653737046" target="_blank">
+                    <img src={require("../Assets/Images/qrWa.jpeg")} alt="whatsapp" className="flex w-[150px]" />
+                  </a>
+                </div>
+                <div className="flex items-center justify-center">
+                  <h3 className="flex text-lg">Scan here to chat</h3>
+                </div>
+              </div>
               <div className="cart-checkout">
                 <div className="subtotal">
                   <span>Subtotal</span>
