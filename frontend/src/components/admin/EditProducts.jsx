@@ -29,6 +29,8 @@ export default function EditProducts() {
     const [currentProd, setCurrentProd] = useState({});
 
     const [productImg, setProductImg] = useState("");
+    const [productImg2, setProductImg2] = useState("");
+    const [productImg3, setProductImg3] = useState("");
     const [category, setCategory] = useState("");
     const [name, setName] = useState("");
     const [price, setPrice] = useState("");
@@ -45,6 +47,7 @@ export default function EditProducts() {
         // Move the initial state setup into useEffect with an empty dependency array
         const initialSelectedFeatures = [];
         let selectedProd = items.find((item) => item._id === prodId);
+        let selectedProdCat = catItems.find((item) => selectedProd.category._id === item._id);
         console.log(selectedProd);
 
         selectedProd.features.forEach((featureId) => {
@@ -56,7 +59,9 @@ export default function EditProducts() {
         setCurrentProd(selectedProd);
         setPreviewImg(selectedProd.image.url);
         setProductImg("");
-        setCategory(selectedProd.category);
+        setProductImg2("");
+        setProductImg3("");
+        setCategory(selectedProdCat);
         setName(selectedProd.name);
         setPrice(selectedProd.price);
         setDesc(selectedProd.desc);
@@ -74,13 +79,19 @@ export default function EditProducts() {
 
     const handleProductImageUpload = (e) => {
         const file = e.target.files[0];
-
         TransformFileData(file);
+    };
+    const handleProductImageUpload2 = (e) => {
+        const file = e.target.files[0];
+        TransformFileData2(file);
+    };
+    const handleProductImageUpload3 = (e) => {
+        const file = e.target.files[0];
+        TransformFileData3(file);
     };
 
     const TransformFileData = (file) => {
         const reader = new FileReader();
-
         if (file) {
             reader.readAsDataURL(file);
             reader.onloadend = () => {
@@ -91,6 +102,28 @@ export default function EditProducts() {
             setProductImg("");
         }
     };
+    const TransformFileData2 = (file) => {
+        const reader = new FileReader();
+        if (file) {
+            reader.readAsDataURL(file);
+            reader.onloadend = () => {
+                setProductImg2(reader.result);
+            };
+        } else {
+            setProductImg2("");
+        }
+    };
+    const TransformFileData3 = (file) => {
+        const reader = new FileReader();
+        if (file) {
+            reader.readAsDataURL(file);
+            reader.onloadend = () => {
+                setProductImg3(reader.result);
+            };
+        } else {
+            setProductImg3("");
+        }
+    };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -98,10 +131,12 @@ export default function EditProducts() {
         dispatch(
             productsEdit({
                 productImg,
+                productImg2,
+                productImg3,
                 product: {
                     ...currentProd,
                     name: name,
-                    brand: category,
+                    category: category,
                     price: price,
                     desc: desc,
                     features: selectedFeatures,
@@ -109,86 +144,8 @@ export default function EditProducts() {
             })
         );
     };
-
+    console.log(category);
     return (
-        // <div>
-        //     <StyledEditProduct>
-        //         <StyledForm onSubmit={handleSubmit}>
-        //             <h3>Create a Product</h3>
-        //             <h5>Upload Image :</h5>
-        //             <input
-        //                 id="imgUpload"
-        //                 accept="image/*"
-        //                 type="file"
-        //                 onChange={handleProductImageUpload}
-        //             />
-        //             <h5>Select Category :</h5>
-        //             <select onChange={(e) => setCategory(e.target.value)} required>
-        //                 {catItems.map((item) => (
-        //                     <option key={item._id} value={item.name}>
-        //                         {item.name}
-        //                     </option>
-        //                 ))}
-        //             </select>
-        //             <h5>Product Name :</h5>
-        //             <input
-        //                 type="text"
-        //                 placeholder="Name"
-        //                 value={name}
-        //                 onChange={(e) => setName(e.target.value)}
-        //                 required
-        //             />
-        //             <h5>Product Price :</h5>
-        //             <input
-        //                 type="number"
-        //                 placeholder="Price"
-        //                 value={price}
-        //                 onChange={(e) => setPrice(e.target.value)}
-        //                 required
-        //             />
-        //             <h5>Description :</h5>
-        //             <input
-        //                 type="text"
-        //                 placeholder="Short Description"
-        //                 value={desc}
-        //                 onChange={(e) => setDesc(e.target.value)}
-        //                 required
-        //             />
-        //             <h5>Select Features :</h5>
-        //             <table>
-        //                 <tbody>
-        //                     {items2.map((item) => (
-        //                         <tr>
-        //                             <td>
-        //                                 <input
-        //                                     type="checkbox"
-        //                                     value={item._id}
-        //                                     checked={selectedFeatures.some((i)=> i._id === item._id)}
-        //                                     onChange={handleCheckboxChange}
-        //                                 />
-        //                             </td>
-        //                             <td>{item.name}</td>
-        //                         </tr>
-        //                     ))}
-        //                 </tbody>
-        //             </table>
-
-        //             <PrimaryButton type="submit">
-        //                 {editStatus === "pending" ? "Submitting" : "Submit"}
-        //             </PrimaryButton>
-        //         </StyledForm>
-        //         <ImagePreview>
-        // {previewImg ? (
-        //     <>
-        //         <img src={previewImg} alt="error!" />
-        //     </>
-        // ) : (
-        //     <p>Product image upload preview will appear here!</p>
-        // )}
-        //         </ImagePreview>
-        //     </StyledEditProduct>
-        // </div>
-
         <ThemeProvider theme={darkTheme}>
             <form onSubmit={handleSubmit}>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 bg-gray-900 text-white py-16">
@@ -196,7 +153,7 @@ export default function EditProducts() {
                         {/* <h3 className="mb-4 text-xl font-semibold">Create a Product</h3> */}
                         <div className="mb-4">
                             <label htmlFor="imgUpload" className="block text-sm text-gray-400">
-                                <h5 className="text-lg font-semibold">Upload Image:</h5>
+                                <h5 className="text-lg font-semibold">Upload Image 1:</h5>
                             </label>
                             <input
                                 id="imgUpload"
@@ -208,20 +165,46 @@ export default function EditProducts() {
                             />
                         </div>
                         <div className="mb-4">
+                            <label htmlFor="imgUpload" className="block text-sm text-gray-400">
+                                <h5 className="text-lg font-semibold">Upload Image 2:</h5>
+                            </label>
+                            <input
+                                id="imgUpload"
+                                accept="image/*"
+                                type="file"
+                                onChange={handleProductImageUpload2}
+                                required
+                                className="mt-1 py-2.5 px-4 w-full border-2 rounded-lg border-gray-800 bg-gray-700 text-white"
+                            />
+                        </div>
+                        <div className="mb-4">
+                            <label htmlFor="imgUpload" className="block text-sm text-gray-400">
+                                <h5 className="text-lg font-semibold">Upload Image 3:</h5>
+                            </label>
+                            <input
+                                id="imgUpload"
+                                accept="image/*"
+                                type="file"
+                                onChange={handleProductImageUpload3}
+                                required
+                                className="mt-1 py-2.5 px-4 w-full border-2 rounded-lg border-gray-800 bg-gray-700 text-white"
+                            />
+                        </div>
+                        <div className="mb-4">
                             <label htmlFor="category" className="block text-sm text-gray-400">
                                 <h5 className="text-lg font-semibold">Select Category:</h5>
                             </label>
                             <select
                                 id="category"
-                                onChange={(e) => setCategory(e.target.value)}
+                                onChange={(e) => setCategory(JSON.parse(e.target.value))}
                                 required
                                 className="mt-1 py-2.5 px-4 w-full border-2 rounded-lg border-gray-800 bg-gray-700 text-white"
                             >
-                                <option value="" disabled>
-                                    <h5 className="text-lg font-semibold">Select Category</h5>
+                                <option value={category ? category._id : " "} selected hidden>
+                                    {category ? category.name : " "}
                                 </option>
                                 {catItems.map((item) => (
-                                    <option key={item._id} value={item._id}>
+                                    <option key={item._id} value={JSON.stringify(item)}>
                                         {item.name}
                                     </option>
                                 ))}

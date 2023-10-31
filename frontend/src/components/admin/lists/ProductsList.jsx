@@ -3,7 +3,7 @@ import { DataGrid } from "@mui/x-data-grid";
 import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-import { productDelete } from "../../../slices/productsSlice";
+import { productDelete, productsFetch } from "../../../slices/productsSlice";
 import { PrimaryButton, darkTheme } from "../CommonStyled";
 import { setHeaders, url } from "../../../slices/api";
 import { useEffect } from "react";
@@ -71,7 +71,20 @@ export default function ProductsList() {
 
   useEffect(() => {
     fetchAll();
+    dispatch(productsFetch());
   }, [items]);
+
+  // const rows = items && items.map((item)=> {
+  //   return {
+  //     id: item._id,
+  //     imageUrl: item.image.url,
+  //     pName: item.name,
+  //     pCat: item.category.name,
+  //     pDesc: item.desc,
+  //     price: item.price.toLocaleString(),
+  //     feature: item.features.name,
+  //   };
+  // });
 
   const columns = [
     { field: "id", headerName: "ID", width: 100 },

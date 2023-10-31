@@ -7,11 +7,17 @@ const router = require("express").Router();
 //CREATE
 
 router.post("/", async (req, res) => {
-  const { name, category, desc, price, image, features, video } = req.body;
+  const { name, category, desc, price, image, image2, image3, features, video } = req.body;
 
   try {
-    if (image) {
+    if (image && image2 && image3) {
       const uploadedResponse = await cloudinary.uploader.upload(image, {
+        upload_preset: "online-shop",
+      });
+      const uploadedResponse2 = await cloudinary.uploader.upload(image2, {
+        upload_preset: "online-shop",
+      });
+      const uploadedResponse3 = await cloudinary.uploader.upload(image3, {
         upload_preset: "online-shop",
       });
 
@@ -22,6 +28,8 @@ router.post("/", async (req, res) => {
           desc,
           price,
           image: uploadedResponse,
+          image2: uploadedResponse2,
+          image3: uploadedResponse3,
           features: features,
           video,
         });

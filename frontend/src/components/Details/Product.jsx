@@ -4,14 +4,16 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import { url } from "../../slices/api";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../../slices/cartSlice";
 import ModalImage from "react-modal-image";
+import Slider from "react-slick";
 
 const Product = () => {
   const params = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const { items: data } = useSelector((state) => state.products);
 
   const [product, setProduct] = useState({
     name: "",
@@ -19,6 +21,8 @@ const Product = () => {
     desc: "",
     price: 0,
     image: null,
+    image2: null,
+    image3: null,
     features: [],
     video: "",
   });
@@ -27,12 +31,13 @@ const Product = () => {
   const [selectedFeatures, setSelectedFeatures] = useState([]);
   const [galleryType, setGalleryType] = useState("image"); // Menyimpan tipe galeri yang aktif (image atau video)
   const [hoveredFeature, setHoveredFeature] = useState(null); // Menyimpan fitur yang sedang dihover
-
+  
   useEffect(() => {
     const fetchProduct = async () => {
       try {
         setLoading(true);
         const res = await axios.get(`${url}/products/find/${params.id}`);
+        console.log(res.data);
         setProduct(res.data);
         setLoading(false);
       } catch (err) {
@@ -86,6 +91,59 @@ const Product = () => {
     setHoveredFeature(null);
   };
 
+  function NextArrow(props) {
+    const { onClick } = props;
+    return (
+      <button onClick={onClick} type="button" className="z-0 absolute top-0 right-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-next>
+        <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 hover:bg-gradient-to-r from-green-400 via-green-500 to-green-600 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+          <svg class="w-4 h-4 text-white dark:text-gray-800" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4" />
+          </svg>
+          <span class="sr-only">Next</span>
+        </span>
+      </button>
+    );
+  }
+
+  function PrevArrow(props) {
+    const { onClick } = props;
+    return (
+      <button onClick={onClick} type="button" class="absolute top-0 left-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-prev>
+        <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 hover:bg-gradient-to-r from-green-400 via-green-500 to-green-600 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+          <svg class="w-4 h-4 text-white dark:text-gray-800" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 1 1 5l4 4" />
+          </svg>
+          <span class="sr-only">Previous</span>
+        </span>
+      </button>
+    );
+  }
+
+  const imageSlider = [
+    {
+      id: 1,
+      image: product.image,
+    },
+    {
+      id: 2,
+      image: product.image2,
+    },
+    {
+      id: 3,
+      image: product.image3,
+    },
+  ];
+  console.log(product.image3);
+  // Settings for the slick carousel
+  const carouselSettings = {
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1, // Number of slides to show at once
+    slidesToScroll: 1,
+    nextArrow: <NextArrow />,
+    prevArrow: <PrevArrow />
+  };
+
   return (
     <div className="flex bg-gray-200 min-h-screen pt-[80px] items-center justify-center">
       <div className="rounded-lg flex container p-8 bg-gray-100 w-[650px] h-[100%] my-[20px] shadow-xl">
@@ -93,13 +151,22 @@ const Product = () => {
           <div>
             <div className="rounded-lg shadow-xl">
               {galleryType === "image" ? (
-                <ModalImage
-                  className="rounded-lg w-[100%] h-[400px]"
-                  small={product.image?.url}
-                  large={product.image?.url}
-                  alt="product"
-                  hideDownload={true}
-                />
+                // <ModalImage
+                //   className="rounded-lg w-[100%] h-[400px]"
+                //   small={product.image?.url}
+                //   large={product.image?.url}
+                //   alt="product"
+                //   hideDownload={true}
+                // />
+                <Slider {...carouselSettings} autoplay className="rounded-lg w-[586px] h-[400px]">
+                  {imageSlider.map((product) => (
+                    <div key={product.id} className="rounded-lg w-[100%] h-[400px]">
+                      <img src={product.image?product.image.url:"#"} alt={product.id} style={{
+                        height: 400
+                      }} className="rounded-lg w-[586px] h-[400px] object-cover" />
+                    </div>
+                  ))}
+                </Slider>
               ) : (
                 <iframe
                   className="rounded-lg w-[100%] h-[400px]"
@@ -114,21 +181,19 @@ const Product = () => {
             <div className="my-4 flex justify-center space-x-4">
               <button
                 onClick={() => toggleGallery("image")}
-                className={`${
-                  galleryType === "image"
-                    ? "bg-gradient-to-r from-green-400 via-green-500 to-green-600 text-gray-100"
-                    : "bg-gray-100"
-                } py-2 px-4 rounded-lg text-dark font-bold transition duration-200 hover:bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:text-gray-100 shadow-xl`}
+                className={`${galleryType === "image"
+                  ? "bg-gradient-to-r from-green-400 via-green-500 to-green-600 text-gray-100"
+                  : "bg-gray-100"
+                  } py-2 px-4 rounded-lg text-dark font-bold transition duration-200 hover:bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:text-gray-100 shadow-xl`}
               >
                 Image
               </button>
               <button
                 onClick={() => toggleGallery("video")}
-                className={`${
-                  galleryType === "video"
-                    ? "bg-gradient-to-r from-green-400 via-green-500 to-green-600 text-gray-100"
-                    : "bg-gray-100"
-                } text-dark py-2 px-4 rounded-lg font-bold transition duration-200 hover:bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:text-gray-100 shadow-xl`}
+                className={`${galleryType === "video"
+                  ? "bg-gradient-to-r from-green-400 via-green-500 to-green-600 text-gray-100"
+                  : "bg-gray-100"
+                  } text-dark py-2 px-4 rounded-lg font-bold transition duration-200 hover:bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:text-gray-100 shadow-xl`}
               >
                 Video
               </button>
@@ -166,7 +231,7 @@ const Product = () => {
                         name={feature.name}
                         value={feature.price}
                         onChange={(e) => handleFeatureChange(e, feature.name)}
-                         className="w-4 h-4 mr-4 text-blue-600 bg-gray-100 border-gray-900 rounded focus:ring-blue-500 focus:ring-blue-600 ring-offset-gray-800 focus:ring-2 bg-gray-100"
+                        className="w-4 h-4 mr-4 text-blue-600 bg-gray-100 border-gray-900 rounded focus:ring-blue-500 focus:ring-blue-600 ring-offset-gray-800 focus:ring-2 bg-gray-100"
                       />
                       {feature.name} (Rp.{feature.price})
                       {hoveredFeature === feature.name && (

@@ -232,7 +232,7 @@ const Home = () => {
             <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
               {status === "success" ? (
                 filteredProducts.map((product) => (
-                  <div key={product._id} className="flex flex-col bg-gray-100 shadow-xl rounded-lg">
+                  <div key={product._id} className="flex flex-col bg-gray-100 shadow-xl rounded-lg h-[400px]">
                     <Link to={"/product/" + product._id}>
                       <img src={product.image.url} alt={product.name} className="w-full h-48 object-cover rounded-t-lg" />
                     </Link>

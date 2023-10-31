@@ -11,6 +11,8 @@ const CreateProduct = () => {
   const [selectedFeatures, setSelectedFeatures] = useState([]);
 
   const [productImg, setProductImg] = useState("");
+  const [productImg2, setProductImg2] = useState("");
+  const [productImg3, setProductImg3] = useState("");
   const [category, setCategory] = useState("");
   const [name, setName] = useState("");
   const [price, setPrice] = useState("");
@@ -26,6 +28,14 @@ const CreateProduct = () => {
   const handleProductImageUpload = (e) => {
     const file = e.target.files[0];
     TransformFileData(file);
+  };
+  const handleProductImageUpload2 = (e) => {
+    const file = e.target.files[0];
+    TransformFileData2(file);
+  };
+  const handleProductImageUpload3 = (e) => {
+    const file = e.target.files[0];
+    TransformFileData3(file);
   };
 
   const TransformFileData = (file) => {
@@ -43,6 +53,40 @@ const CreateProduct = () => {
       };
     } else {
       setProductImg("");
+    }
+  };
+  const TransformFileData2 = (file) => {
+    const reader = new FileReader();
+
+    if (file) {
+      reader.readAsDataURL(file);
+
+      reader.onloadend = () => {
+        if (reader.result) {
+          setProductImg2(reader.result);
+        } else {
+          console.error("Failed to read the file.");
+        }
+      };
+    } else {
+      setProductImg2("");
+    }
+  };
+  const TransformFileData3 = (file) => {
+    const reader = new FileReader();
+
+    if (file) {
+      reader.readAsDataURL(file);
+
+      reader.onloadend = () => {
+        if (reader.result) {
+          setProductImg3(reader.result);
+        } else {
+          console.error("Failed to read the file.");
+        }
+      };
+    } else {
+      setProductImg3("");
     }
   };
 
@@ -64,6 +108,8 @@ const CreateProduct = () => {
         price,
         desc,
         image: productImg,
+        image2: productImg2,
+        image3: productImg3,
         features: selectedFeatures,
         video,
       })
@@ -82,13 +128,39 @@ const CreateProduct = () => {
             {/* <h3 className="mb-4 text-xl font-semibold">Create a Product</h3> */}
             <div className="mb-4">
               <label htmlFor="imgUpload" className="block text-sm text-gray-400">
-                <h5 className="text-lg font-semibold">Upload Image:</h5>
+                <h5 className="text-lg font-semibold">Upload Image 1:</h5>
               </label>
               <input
                 id="imgUpload"
                 accept="image/*"
                 type="file"
                 onChange={handleProductImageUpload}
+                required
+                className="mt-1 py-2.5 px-4 w-full border-2 rounded-lg border-gray-800 bg-gray-700 text-white"
+              />
+            </div>
+            <div className="mb-4">
+              <label htmlFor="imgUpload" className="block text-sm text-gray-400">
+                <h5 className="text-lg font-semibold">Upload Image 2:</h5>
+              </label>
+              <input
+                id="imgUpload"
+                accept="image/*"
+                type="file"
+                onChange={handleProductImageUpload2}
+                required
+                className="mt-1 py-2.5 px-4 w-full border-2 rounded-lg border-gray-800 bg-gray-700 text-white"
+              />
+            </div>
+            <div className="mb-4">
+              <label htmlFor="imgUpload" className="block text-sm text-gray-400">
+                <h5 className="text-lg font-semibold">Upload Image 3:</h5>
+              </label>
+              <input
+                id="imgUpload"
+                accept="image/*"
+                type="file"
+                onChange={handleProductImageUpload3}
                 required
                 className="mt-1 py-2.5 px-4 w-full border-2 rounded-lg border-gray-800 bg-gray-700 text-white"
               />
