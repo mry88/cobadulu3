@@ -8,7 +8,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faMicrochip, faCar, faHome, faCode, faLayerGroup
 } from "@fortawesome/free-solid-svg-icons";
-import '../App.css'
+import '../App.css';
 
 
 function NextArrow(props) {
@@ -41,6 +41,7 @@ function PrevArrow(props) {
 
 const Home = () => {
   const { items: data, status } = useSelector((state) => state.products);
+  const { latestProd, stateRefreshProd } = useSelector((state) => state.products);
   const { items } = useSelector((state) => state.category);
 
   const scrollButtonRef = useRef();
@@ -115,9 +116,6 @@ const Home = () => {
     return true;
   });
 
-  const latestProd = filteredProducts[0];
-  console.log(latestProd);
-
   // Settings for the slick carousel
   const carouselSettings = {
     infinite: true,
@@ -174,25 +172,33 @@ const Home = () => {
 
         <div className="flex flex-row w-full h-[400px]">
           <div className="flex flex-row w-[50%]">
-            <div key={latestProd._id} className="flex flex-row bg-gray-100 shadow-xl rounded-lg h-[400px] w-[100%] ml-[50px] mr-[20px]">
-              <Link to={"/product/" + latestProd._id} className="w-[70%] h-[400px] py-[20px] pl-[20px]">
-                <img src={latestProd.image.url} alt={latestProd.name} className="w-[100%] h-[100%] object-cover rounded-lg" />
-              </Link>
-              <div className="flex flex-col w-[30%] p-[20px]">
-                <div className="flex flex-col grow items-center justify-center">
-                  <h3 className="text-dark font-bold text-2xl pb-2">{latestProd.name}</h3>
-                  <p className="text-dark text-sm font-medium">{latestProd.category.name}</p>
-                  <p className="text-dark text-xl font-bold mt-1">Rp. {latestProd.price}</p>
-                </div>
-                <div className="">
-                  <Link to={"/product/" + latestProd._id}>
-                    <button className="w-full rounded-lg border-2 border-gray-900 px-5 py-2 font-bold text-gray-100 transition duration-200 hover:bg-gradient-to-r from-green-400 via-green-500 to-green-600 border-white/20 bg-gray-900 active:bg-white/20 hover:text-white">
-                      View Detail
-                    </button>
+            {status === "success" ? (
+              latestProd.map((latestProd) => (
+                <div key={latestProd._id} className="flex flex-row bg-gray-100 shadow-xl rounded-lg h-[400px] w-[100%] ml-[50px] mr-[20px]">
+                  <Link to={"/product/" + latestProd ? latestProd._id : ""} className="w-[70%] h-[400px] py-[20px] pl-[20px]">
+                    <img src={latestProd.image.url} alt={latestProd.name} className="w-[100%] h-[100%] object-cover rounded-lg" />
                   </Link>
+                  <div className="flex flex-col w-[30%] p-[20px]">
+                    <div className="flex flex-col grow items-center justify-center">
+                      <h3 className="text-dark font-bold text-2xl pb-2">{latestProd.name}</h3>
+                      <p className="text-dark text-sm font-medium">{latestProd.category.name}</p>
+                      <p className="text-dark text-xl font-bold mt-1">Rp. {latestProd.price}</p>
+                    </div>
+                    <div className="">
+                      <Link to={"/product/" + latestProd._id}>
+                        <button className="w-full rounded-lg border-2 border-gray-900 px-5 py-2 font-bold text-gray-100 transition duration-200 hover:bg-gradient-to-r from-green-400 via-green-500 to-green-600 border-white/20 bg-gray-900 active:bg-white/20 hover:text-white">
+                          View Detail
+                        </button>
+                      </Link>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
+              ))
+            ) : status === "pending" ? (
+              <p className="text-white">Loading...</p>
+            ) : (
+              <p className="text-white">Unexpected error occurred...</p>
+            )}
           </div>
           <div className="flex flex-row w-[50%]">
             <iframe

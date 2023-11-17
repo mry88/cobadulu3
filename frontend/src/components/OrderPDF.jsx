@@ -23,7 +23,7 @@ const OrderPDF = ({ orderData, orderQuantity, orderTotal }) => {
             <View style={styles.containerBilledTo}>
               <View style={[styles.invoiceInfo, { marginLeft: 0 }]}>
                 <Text style={styles.titleInfo}>Billed To</Text>
-                <Text style={styles.descInfo}>Hanjaya
+                <Text style={styles.descInfo}>lorem ipsum
                   {'\n'}1234 Your Street
                   {'\n'}City, California
                   {'\n'}90210
@@ -35,21 +35,21 @@ const OrderPDF = ({ orderData, orderQuantity, orderTotal }) => {
                 <View style={styles.containerInvoiceInfo}>
                   <View style={styles.invoiceInfo}>
                     <Text style={styles.titleInfo}>Date Issued</Text>
-                    <Text style={styles.descInfo}>Hanjaya</Text>
+                    <Text style={styles.descInfo}>lorem ipsum</Text>
                   </View>
                   <View style={styles.invoiceInfo}>
                     <Text style={styles.titleInfo}>Invoice Number</Text>
-                    <Text style={styles.descInfo}>Hanjaya</Text>
+                    <Text style={styles.descInfo}>lorem ipsum</Text>
                   </View>
                   <View style={styles.invoiceInfo}>
                     <Text style={styles.titleInfo}>Amount Due</Text>
-                    <Text style={styles.descInfo}>Hanjaya</Text>
+                    <Text style={styles.descInfo}>lorem ipsum</Text>
                   </View>
                 </View>
                 <View style={styles.containerInvoiceInfo}>
                   <View style={styles.invoiceInfo}>
                     <Text style={styles.titleInfo}>Due Date</Text>
-                    <Text style={styles.descInfo}>Hanjaya</Text>
+                    <Text style={styles.descInfo}>lorem ipsum</Text>
                   </View>
                 </View>
               </View>

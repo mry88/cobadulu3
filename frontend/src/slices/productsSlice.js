@@ -5,6 +5,8 @@ import { toast } from "react-toastify";
 
 const initialState = {
   items: [],
+  latestProd: [],
+  stateRefreshProd: [],
   status: null,
   createStatus: null,
   editStatus: null,
@@ -93,6 +95,11 @@ const productsSlice = createSlice({
     },
     [productsFetch.fulfilled]: (state, action) => {
       state.items = action.payload;
+
+      state.latestProd = action.payload.filter((payload, index)=> index === 0);
+      console.log(state.latestProd);
+      state.stateRefreshProd = Math.random();
+
       state.status = "success";
     },
     [productsFetch.rejected]: (state, action) => {

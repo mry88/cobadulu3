@@ -184,4 +184,6 @@ const SideStats = styled.div`
   flex-direction: column;
   margin-left: 2rem;
   width: 100%;
+  height: 600px;
+  overflow: auto;
 `;
