@@ -76,24 +76,38 @@ router.delete("/:id", async (req, res) => {
 router.put("/:id", isAdmin, async (req, res) => {
   if (req.body.productImg) {
     const destroyResponse = await cloudinary.uploader.destroy(
-      req.body.product.image.public_id
+      req.body.product.image.public_id,
     );
 
     if (destroyResponse) {
-      const uploadedResponse = await cloudinary.uploader.upload(
-        req.body.productImg,
-        {
-          upload_preset: "online-shop",
-        }
-      );
+      // const uploadedResponse = await cloudinary.uploader.upload(
+      //   req.body.productImg,
+      //   req.body.productImg2,
+      //   req.body.productImg3,
+      //   {
+      //     upload_preset: "online-shop",
+      //   }
+      // );
 
-      if (uploadedResponse) {
+      const uploadedResponse = await cloudinary.uploader.upload(req.body.productImg, {
+        upload_preset: "online-shop",
+      });
+      const uploadedResponse2 = await cloudinary.uploader.upload(req.body.productImg2, {
+        upload_preset: "online-shop",
+      });
+      const uploadedResponse3 = await cloudinary.uploader.upload(req.body.productImg3, {
+        upload_preset: "online-shop",
+      });
+
+      if (uploadedResponse && uploadedResponse2 && uploadedResponse3) {
         const updatedProduct = await Product.findByIdAndUpdate(
           req.params.id,
           {
             $set: {
               ...req.body.product,
               image: uploadedResponse,
+              image2: uploadedResponse2,
+              image3: uploadedResponse3,
             },
           },
           { new: true }
