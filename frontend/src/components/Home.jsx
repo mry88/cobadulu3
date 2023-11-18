@@ -635,8 +635,7 @@ const Home = () => {
                         >
                           <span
                             class="text-gray-700 transition group-hover:text-gray-700/75 dark:text-white dark:hover:text-white/75"
-                          >
-                            Live Chat
+                          >Live Chat
                           </span>
 
                           <span class="relative flex h-2 w-2">
@@ -679,7 +678,7 @@ const Home = () => {
                           </svg>
 
                           <span class="flex-1 text-gray-700 dark:text-gray-300">
-                            john@doe.com
+                            info@codespace.id
                           </span>
                         </a>
                       </li>
@@ -705,8 +704,7 @@ const Home = () => {
                           </svg>
 
                           <span class="flex-1 text-gray-700 dark:text-gray-300"
-                          >0123456789</span
-                          >
+                          >0821-4186-6633</span>
                         </a>
                       </li>
 
@@ -736,7 +734,7 @@ const Home = () => {
                         <address
                           class="-mt-0.5 flex-1 not-italic text-gray-700 dark:text-gray-300"
                         >
-                          213 Lane, London, United Kingdom
+                          Jl. Angklung No.H1, Tunggulwulung, Kec. Lowokwaru, Kota Malang
                         </address>
                       </li>
                     </ul>
@@ -769,7 +767,7 @@ const Home = () => {
                   <p
                     class="mt-4 text-sm text-gray-500 dark:text-gray-400 sm:order-first sm:mt-0"
                   >
-                    &copy; 2022 Company Name
+                    &copy; 2023 codespace.id
                   </p>
                 </div>
               </div>
