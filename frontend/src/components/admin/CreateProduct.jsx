@@ -1,11 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { productsCreate } from "../../slices/productsSlice";
+import { productsCreate, productsFetch } from "../../slices/productsSlice";
 import { ThemeProvider, createTheme } from "@mui/material";
 
 const CreateProduct = () => {
   const dispatch = useDispatch();
   const { createStatus } = useSelector((state) => state.products);
+  const { produk } = useSelector((state) => state.products);
   const { items } = useSelector((state) => state.features);
   const { catItems } = useSelector((state) => state.category);
   const [selectedFeatures, setSelectedFeatures] = useState([]);
@@ -24,6 +25,10 @@ const CreateProduct = () => {
       mode: 'dark',
     },
   });
+
+  useEffect(() => {
+    dispatch(productsFetch());
+  }, [produk]);
 
   const handleProductImageUpload = (e) => {
     const file = e.target.files[0];

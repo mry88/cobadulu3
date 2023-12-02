@@ -4,6 +4,7 @@ import { url, setHeaders } from "./api";
 import { toast } from "react-toastify";
 
 const initialState = {
+  produk: [],
   items: [],
   latestProd: [],
   stateRefreshProd: [],
@@ -95,6 +96,7 @@ const productsSlice = createSlice({
     },
     [productsFetch.fulfilled]: (state, action) => {
       state.items = action.payload;
+      state.produk = action.payload;
 
       state.latestProd = action.payload.filter((payload, index)=> index === 0);
       console.log(state.latestProd);
