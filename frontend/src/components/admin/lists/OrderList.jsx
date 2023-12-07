@@ -53,7 +53,6 @@ export default function OrderList() {
     { field: "oProduct", headerName: "Product Name", width: 150 },
     { field: "oFeatures", headerName: "Features", width: 200 },
     { field: "oTotal", headerName: "Total (Rp.)", width: 120 },
-    { field: "oStatus", headerName: "Status", width: 100 },
   ];
 
   const handleOrderDispatch = (id) => {

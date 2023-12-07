@@ -49,28 +49,27 @@ router.get("/find/:id", async (req, res) => {
 // UPDATE USER
 router.put("/:id", async (req, res) => {
   try {
-    // const user = await User.findById(req.params.id);
+    const user = await User.findById(req.params.id);
 
-    // if (!(user.email === req.body.email)) {
-    //   const emailInUse = await User.findOne({ email: req.body.email });
-    //   if (emailInUse)
-    //     return res.status(400).send("That email is already taken...");
-    // }
+    if (!(user.email === req.body.email)) {
+      const emailInUse = await User.findOne({ email: req.body.email });
+      if (emailInUse)
+        return res.status(400).send("That email is already taken...");
+    }
 
-    // if (req.body.password && user) {
-    //   const salt = await bcrypt.genSalt(10);
-    //   const hashedPassword = await bcrypt.hash(req.body.password, salt);
+    if (req.body.password && user) {
+      const salt = await bcrypt.genSalt(10);
+      const hashedPassword = await bcrypt.hash(req.body.password, salt);
 
-    //   user.password = hashedPassword;
-    // }
+      user.password = hashedPassword;
+    }
 
     const updatedUser = await User.findByIdAndUpdate(
       req.params.id,
       {
-        // name: req.body.name,
-        // email: req.body.email,
-        // isAdmin: req.body.isAdmin,
-        // password: user.password,
+        name: req.body.name,
+        email: req.body.email,
+        password: user.password,
         $set: req.body.user
       },
       { new: true }

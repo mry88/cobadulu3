@@ -32,6 +32,8 @@ export default function EditUsers() {
         }
     }, []);
 
+    console.log(isAdmin);
+
     const handleUpdateUser = async (e) => {
         e.preventDefault();
         dispatch(userEdit({

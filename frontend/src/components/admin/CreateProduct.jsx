@@ -2,9 +2,11 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { productsCreate, productsFetch } from "../../slices/productsSlice";
 import { ThemeProvider, createTheme } from "@mui/material";
+import { Navigate, useNavigate } from "react-router-dom";
 
 const CreateProduct = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { createStatus } = useSelector((state) => state.products);
   const { produk } = useSelector((state) => state.products);
   const { items } = useSelector((state) => state.features);
@@ -123,6 +125,8 @@ const CreateProduct = () => {
     setCategory("");
     setDesc("");
     setPrice("");
+
+    navigate("/admin/products")
   };
 
   return (

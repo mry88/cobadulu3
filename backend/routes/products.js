@@ -33,7 +33,6 @@ router.post("/", async (req, res) => {
           features: features,
           video,
         });
-        console.log(product);
 
         const savedProduct = await product.save();
         res.status(200).send(savedProduct);

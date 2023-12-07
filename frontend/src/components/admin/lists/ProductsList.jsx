@@ -14,7 +14,7 @@ import { ThemeProvider } from '@mui/material/styles';
 export default function ProductsList() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { items } = useSelector((state) => state.products);
+  const { items, stateRefreshProd } = useSelector((state) => state.products);
   const [row, setRow] = useState([]);
 
   const fetchAll = async () => {
@@ -68,13 +68,17 @@ export default function ProductsList() {
       console.error("Error fetching feature names:", error);
     }
   };
-
+  
   useEffect(() => {
     fetchAll();
-    dispatch(productsFetch());
-  }, [items]);
+  }, [stateRefreshProd]);
+  console.log(stateRefreshProd);
 
   // const rows = items && items.map((item)=> {
+  //   const featureNames = items.reduce((res, item) => {
+  //     const features = res.find((idf)=> idf.features === item.)
+  //   });
+    
   //   return {
   //     id: item._id,
   //     imageUrl: item.image.url,
@@ -82,7 +86,7 @@ export default function ProductsList() {
   //     pCat: item.category.name,
   //     pDesc: item.desc,
   //     price: item.price.toLocaleString(),
-  //     feature: item.features.name,
+  //     feature: featureNames,
   //   };
   // });
 

@@ -113,6 +113,7 @@ const productsSlice = createSlice({
     [productsCreate.fulfilled]: (state, action) => {
       state.items.push(action.payload);
       state.createStatus = "success";
+      state.stateRefreshProd = Math.random();
       toast.success("Product Created!", {
         position: "bottom-left",
       });
@@ -128,6 +129,7 @@ const productsSlice = createSlice({
         (item) => item._id !== action.payload._id
       );
       state.items = newList;
+      state.stateRefreshProd = Math.random();
       state.deleteStatus = "success";
       toast.success("Product Deleted!", {
         position: "bottom-left",
@@ -145,6 +147,7 @@ const productsSlice = createSlice({
       );
       state.items = updatedProducts;
       state.editStatus = "success";
+      state.stateRefreshProd = Math.random();
       toast.info("Product Edited", {
         position: "bottom-left",
       });
