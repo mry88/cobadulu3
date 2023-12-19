@@ -9,6 +9,19 @@ const NavBar = () => {
   const { cartTotalQuantity } = useSelector((state) => state.cart);
   const auth = useSelector((state) => state.auth);
 
+  const handleScroll = () => {
+    // Replace these values with the coordinates where you want to scroll
+    const targetX = 0;
+    const targetY = document.documentElement.scrollHeight;
+
+    // Smooth scroll to the specified coordinates
+    window.scrollTo({
+      top: targetY,
+      left: targetX,
+      behavior: 'smooth',
+    });
+  };
+
   return (
     <nav className="fixed top-0 z-10 left-0 right-0 bg-gray-900 w-full h-16 justify-between flex items-center border-b-2 border-gray-900 py-10">
       <Link to="/">
@@ -35,6 +48,11 @@ const NavBar = () => {
       </Link>
       {auth._id ? (
         <Links>
+          <Link to="/">
+            <button onClick={handleScroll} type="button" className="bg-green-600 mr-2 rounded-lg px-5 py-2 text-lg font-bold text-gray-100 transition duration-200 hover:bg-gradient-to-r from-green-400 via-green-500 to-green-600">
+              About Us
+            </button>
+          </Link>
           {auth.isAdmin ? (
             <div className="flex text-xl">
               <Link className="bg-green-600 rounded-lg px-5 py-2 text-lg font-bold text-gray-100 transition duration-200 hover:bg-gradient-to-r from-green-400 via-green-500 to-green-600" to="/admin">
@@ -57,6 +75,11 @@ const NavBar = () => {
       ) : (
         <AuthLinks>
           <div className="pr-6">
+            <Link to="/">
+              <button onClick={handleScroll} type="button" className="bg-green-600 mr-2 rounded-lg px-5 py-2 text-lg font-bold text-gray-100 transition duration-200 hover:bg-gradient-to-r from-green-400 via-green-500 to-green-600">
+                About Us
+              </button>
+            </Link>
             <Link to="/login">
               <button type="button" className="bg-green-600 rounded-lg px-5 py-2 text-lg font-bold text-gray-100 transition duration-200 hover:bg-gradient-to-r from-green-400 via-green-500 to-green-600">
                 Login

@@ -6,6 +6,8 @@ const OrderPDF = ({ orderData, orderQuantity, orderTotal }) => {
   const auth = useSelector((state) => state.auth);
   const cart = useSelector((state) => state.cart);
 
+  
+
   return (
     <PDFViewer style={styles.pdfViewer}>
       <Document>

@@ -203,7 +203,7 @@ const Home = () => {
           <div className="flex flex-row w-[50%]">
             <iframe
               className="rounded-lg w-[100%] h-[400px] mr-[50px] ml-[20px] shadow-xl"
-              src="https://www.youtube.com/embed/a7YYJVGBy6A?si=7tk0ydJ6Wl-l86Md"
+              src="https://www.youtube.com/embed/UoNlrHEfeiQ?si=IZE2hLizQHvYdK_U"
               title="product-video"
               frameBorder="0"
               allow="autoplay; encrypted-media"
@@ -331,6 +331,7 @@ const Home = () => {
               <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7 7.674 1.3a.91.91 0 0 0-1.348 0L1 7" />
             </svg>
           </button>
+          
         </div>
 
         <div className="dark">
